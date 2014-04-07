@@ -118,32 +118,6 @@ class Binary{
 		return m;
 	}
 	
-	public static function readDataArray(string str, int len = 10, & offset = 0) -> array{
-		array data = [];
-		int i = 1;
-		int l;
-		let offset = 0;
-
-		while i < len && isset(str[offset]) {
-			let l = self::readTriad(str[offset] . str[offset + 1] . str[offset + 2]);
-			let offset += 3;
-			let data[] = substr(str, offset, l);
-			let offset += l;
-			let i++;
-		}
-		
-		return data;
-	}
-	
-	public static function writeDataArray(array data) -> string{
-		string raw = "";
-		for v in data {
-			let raw .= self::writeTriad(strlen(v)) . v;
-		}
-		
-		return raw;
-	}
-	
 	public static function readBool(string b) -> boolean{
 		return (char) b[0] === 0 ? false : true;
 	}
