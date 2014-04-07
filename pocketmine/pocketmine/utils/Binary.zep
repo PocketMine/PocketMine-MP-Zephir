@@ -60,7 +60,7 @@ class Binary{
 		
 		let b = ord(value[0]);
 		
-		while b !== 127 and isset(value[offset]) {
+		while b !== 127 && isset(value[offset]) {
 			let bottom = b & 0x1f;
 			let type = (b & 0xe0) / 32;
 			switch type {
@@ -124,7 +124,7 @@ class Binary{
 		int l;
 		let offset = 0;
 
-		while i < len and isset(str[offset]) {
+		while i < len && isset(str[offset]) {
 			let l = self::readTriad(str[offset] . str[offset + 1] . str[offset + 2]);
 			let offset += 3;
 			let data[] = substr(str, offset, l);
@@ -155,7 +155,7 @@ class Binary{
 	public static function readByte(string c, boolean isSigned = true) -> int{
 		int b;
 		let b = (char) c[0] * (int) 1;
-		if(isSigned === true and (b & 0x80) > 0){
+		if(isSigned === true && (b & 0x80) > 0){
 			let b = -0x80 + (b & 0x7f);
 		}
 		
@@ -163,7 +163,7 @@ class Binary{
 	}
 	
 	public static function writeByte(int c) -> string{
-		if(c < 0 and c >= -0x80){
+		if(c < 0 && c >= -0x80){
 			let c = 0xff + c + 1;
 		}
 		
@@ -174,7 +174,7 @@ class Binary{
 		int unpacked;
 		let unpacked = (char) str[0] * (int) 256 + (char) str[1];
 		
-		if(unpacked > 0x7fff and isSigned === true){
+		if(unpacked > 0x7fff && isSigned === true){
 			unpacked -= 0x10000;
 		}
 		
@@ -192,7 +192,7 @@ class Binary{
 		int unpacked;
 		let unpacked = (char) str[1] * (int) 256 + (char) str[0];
 		
-		if(unpacked > 0x7fff and isSigned === true){
+		if(unpacked > 0x7fff && isSigned === true){
 			unpacked -= 0x10000;
 		}
 		
