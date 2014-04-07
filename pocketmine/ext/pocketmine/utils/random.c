@@ -143,7 +143,7 @@ PHP_METHOD(PocketMine_Utils_Random, nextBoolean) {
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "nextsignedint",  NULL);
 	zephir_check_call_status();
-	RETURN_MM_BOOL(((int) (zephir_get_numberval(_0)) & 0x01) == 0);
+	RETURN_MM_BOOL(ZEPHIR_GE_LONG(_0, 0));
 
 }
 
