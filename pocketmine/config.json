@@ -2,7 +2,7 @@
   "author" : "PocketMine Team",
   "description" : "Optional extension that implements parts of PocketMine-MP in a fast PHP extension ",
   "name" : "pocketmine",
-  "namespace" : "PocketMine",
+  "namespace" : "pocketmine",
   "version" : "0.0.1",
   "optimizations" : { "call-gatherer-pass" : true,
       "check-invalid-reads" : false,
