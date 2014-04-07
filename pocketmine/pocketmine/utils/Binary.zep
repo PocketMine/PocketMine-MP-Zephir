@@ -296,7 +296,7 @@ class Binary{
 
 	public static function readLong(string x, boolean isSigned = true){
 		var value = "0";
-		int i;
+		int i = 0;
 		
 		while i < 8 {
 			let value = bcmul(value, "65536", 0);
