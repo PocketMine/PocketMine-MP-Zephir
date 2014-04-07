@@ -277,6 +277,15 @@ class Binary{
 			return pack("d", value);
 		}
 	}
+	
+	private static function __s_not(string s) -> string{
+		int i = 0;
+		string r = "";
+		while(i < s->length()){
+			r[i] = ~s[i];
+		}
+		return r;
+	}
 
 	public static function readLong(string x, boolean isSigned = true) -> string{
 		string value = "0";
@@ -286,7 +295,7 @@ class Binary{
 		if(isSigned === true){
 			let negative = ((char) x[0] & 0x80) > 0 ? true : false;
 			if(negative === true){
-				let x = ~x;
+				let x = self::__s_not(x);
 			}
 		}
 		
@@ -321,7 +330,7 @@ class Binary{
 		let x = str_pad(substr(x, 0, 8), 8, "\x00", STR_PAD_LEFT);
 		
 		if(negative === true){
-			let x = ~x;
+			let x = self::__s_not(x);
 		}
 		
 		return x;
