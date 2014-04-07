@@ -149,7 +149,7 @@ class Binary{
 		let unpacked = (char) str[0] * (int) 256 + (char) str[1];
 		
 		if(unpacked > 0x7fff && isSigned === true){
-			unpacked -= 0x10000;
+			let unpacked -= 0x10000;
 		}
 		
 		return unpacked;
@@ -157,7 +157,7 @@ class Binary{
 	
 	public function writeShort(long value) -> string{
 		if(value < 0){
-			value += 0x10000;
+			let value += 0x10000;
 		}
 		return pack("n", value);
 	}
@@ -167,7 +167,7 @@ class Binary{
 		let unpacked = (char) str[1] * (int) 256 + (char) str[0];
 		
 		if(unpacked > 0x7fff && isSigned === true){
-			unpacked -= 0x10000;
+			let unpacked -= 0x10000;
 		}
 		
 		return unpacked;
@@ -175,7 +175,7 @@ class Binary{
 	
 	public function writeLShort(long value) -> string{
 		if(value < 0){
-			value += 0x10000;
+			let value += 0x10000;
 		}
 		return pack("v", value);
 	}
@@ -185,7 +185,7 @@ class Binary{
 		let unpacked = (char) str[0] * (long) 16777216 + (char) str[1] * 65536 + (char) str[2] * 256 + (char) str[3];
 		
 		if(unpacked > 2147483647){
-			unpacked -= 4294967296;
+			let unpacked -= 4294967296;
 		}
 		
 		return unpacked;
@@ -200,7 +200,7 @@ class Binary{
 		let unpacked = (char) str[3] * (long) 16777216 + (char) str[2] * 65536 + (char) str[1] * 256 + (char) str[0];
 		
 		if(unpacked > 2147483647){
-			unpacked -= 4294967296;
+			let unpacked -= 4294967296;
 		}
 		
 		return unpacked;
