@@ -282,7 +282,7 @@ class Binary{
 		int i = 0;
 		string r = "";
 		while(i < s->length()){
-			let r[i] = ~s[i];
+			let r[i] = chr(~ (char) s[i]);
 		}
 		return r;
 	}
