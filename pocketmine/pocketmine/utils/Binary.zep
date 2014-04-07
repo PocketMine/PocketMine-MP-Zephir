@@ -304,7 +304,7 @@ class Binary{
 			let i += 2;
 		}
 		
-		if(isSigned === true and bccomp(value, "9223372036854775807") == 1){
+		if(isSigned === true && bccomp(value, "9223372036854775807") == 1){
 			let value = bcadd(value, "-18446744073709551616");
 		}
 		
