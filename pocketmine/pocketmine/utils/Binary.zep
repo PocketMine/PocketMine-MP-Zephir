@@ -151,7 +151,7 @@ class Binary{
 		return chr(c);
 	}
 	
-	public function readShort(string str, boolean isSigned = true) -> int{
+	public static function readShort(string str, boolean isSigned = true) -> int{
 		int unpacked;
 		let unpacked = ord(str[0]) * (int) 256 + ord(str[1]);
 		
@@ -162,14 +162,14 @@ class Binary{
 		return unpacked;
 	}
 	
-	public function writeShort(long value) -> string{
+	public static function writeShort(long value) -> string{
 		if(value < 0){
 			let value += 0x10000;
 		}
 		return pack("n", value);
 	}
 	
-	public function readLShort(string str, boolean isSigned = true){
+	public static function readLShort(string str, boolean isSigned = true){
 		int unpacked;
 		let unpacked = ord(str[1]) * (int) 256 + ord(str[0]);
 		
@@ -180,14 +180,14 @@ class Binary{
 		return unpacked;
 	}
 	
-	public function writeLShort(long value) -> string{
+	public static function writeLShort(long value) -> string{
 		if(value < 0){
 			let value += 0x10000;
 		}
 		return pack("v", value);
 	}
 
-	public function readInt(string str) -> long{
+	public static function readInt(string str) -> long{
 		long unpacked;
 		let unpacked = ord(str[0]) * (long) 16777216 + ord(str[1]) * 65536 + ord(str[2]) * 256 + ord(str[3]);
 		
@@ -202,7 +202,7 @@ class Binary{
 		return pack("N", value);
 	}
 
-	public function readLInt(string str) -> long{
+	public static function readLInt(string str) -> long{
 		long unpacked;
 		let unpacked = ord(str[3]) * (long) 16777216 + ord(str[2]) * 65536 + ord(str[1]) * 256 + ord(str[0]);
 		
