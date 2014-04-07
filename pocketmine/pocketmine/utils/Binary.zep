@@ -324,7 +324,7 @@ class Binary{
 		while bccomp(value, "0", 0) > 0 {
 			let temp = intval(bcmod(value, "16777216"));
 			let x = chr((temp & 0xFF0000) / 65536) . chr((temp & 0xFF00) / 256) . chr(temp & 0xFF) . x;
-			value = bcdiv(value, "16777216", 0);
+			let value = bcdiv(value, "16777216", 0);
 		}
 		
 		let x = str_pad(substr(x, 0, 8), 8, "\x00", STR_PAD_LEFT);
