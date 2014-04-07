@@ -294,51 +294,35 @@ class Binary{
 		return r;
 	}
 
-	public static function readLong(var x, boolean isSigned = true){
+	public static function readLong(string x, boolean isSigned = true){
 		var value = "0";
-		int i = 0;
-		boolean negative = false;
-		
-		if(isSigned === true){
-			let negative = (x[0] & 0x80) > 0 ? true : false;
-			if(negative === true){
-				let x = self::__s_not(x);
-			}
-		}
+		int i;
 		
 		while i < 8 {
-			let value = bcmul(value, "4294967296", 0);
-			let value = bcadd(value, bcadd(bcadd(bcadd(bcmul("16777216", ord(x[i])), ord(x[i + 1]) * 65536),  ord(x[i + 2]) * 256), ord(x[i + 3])), 0);
-			let i += 4;
+			let value = bcmul(value, "65536", 0);
+			let value = bcadd(value, Utils::readShort(substr(x, i, 2), false), 0);
+			let i += 2;
 		}
 		
-		return negative === true ? "-" . value : value;
+		if(isSigned === true and bccomp(value, "9223372036854775807") == 1){
+			let value = bcadd(value, "-18446744073709551616");
+		}
+		
+		return value;
 	}
 	
 	public static function writeLong(var value){
-		var x = "";
-		long temp;
-		boolean negative = false;
+		string x = "";
+		int i = 8;
 		
-		if(value[0] === "-"){
-			let negative = true;
-			let value = bcadd(value, "1");
-			if(value[0] === "-"){
-				let value = substr(value, 1);
-			}
+		if(bccomp(value, "0") == -1){
+			let value = bcadd(value, "18446744073709551616");
 		}
-		
-		while bccomp(value, "0", 0) > 0 {
-			let temp = intval(bcmod(value, "16777216"));
-			let x = chr((temp & 0xFF0000) / 65536) . chr((temp & 0xFF00) / 256) . chr(temp & 0xFF) . x;
-			let value = bcdiv(value, "16777216", 0);
-		}
-		
-		let x = str_pad(substr(x, 0, 8), 8, "\x00", STR_PAD_LEFT);
-		
-		if(negative === true){
-			let x = self::__s_not(x);
-		}
+
+		let x .= self::writeShort(bcmod(bcdiv(value, "281474976710656"), "65536"));
+		let x .= self::writeShort(bcmod(bcdiv(value, "4294967296"), "65536"));
+		let x .= self::writeShort(bcmod(bcdiv(value, "65536"), "65536"));
+		let x .= self::writeShort(bcmod(value, "65536"));
 		
 		return x;
 	}
