@@ -6,7 +6,7 @@ class Binary{
 	const LITTLE_ENDIAN = 0x01;
 	
 	public static function readTriad(string str) -> long{
-		return ord(str[0]) * (long) 65536 + ord(str[1]) * 256 + ord(str[0]);
+		return (long) unpack("N", "\x00", str)[1];
 	}
 	
 	public static function writeTriad(long value) -> string{
@@ -153,7 +153,7 @@ class Binary{
 	
 	public static function readShort(string str, boolean isSigned = true) -> int{
 		int unpacked;
-		let unpacked = ord(str[0]) * (int) 256 + ord(str[1]);
+		let unpacked = (int) unpack("n", str)[1];
 		
 		if(unpacked > 0x7fff && isSigned === true){
 			let unpacked -= 0x10000;
@@ -171,7 +171,7 @@ class Binary{
 	
 	public static function readLShort(string str, boolean isSigned = true){
 		int unpacked;
-		let unpacked = ord(str[1]) * (int) 256 + ord(str[0]);
+		let unpacked = (int) unpack("v", str)[1];
 		
 		if(unpacked > 0x7fff && isSigned === true){
 			let unpacked -= 0x10000;
@@ -189,7 +189,7 @@ class Binary{
 
 	public static function readInt(string str) -> long{
 		long unpacked;
-		let unpacked = ord(str[0]) * (long) 16777216 + ord(str[1]) * 65536 + ord(str[2]) * 256 + ord(str[3]);
+		let unpacked = (long) unpack("N", str)[1];
 		
 		if(unpacked > 2147483647){
 			let unpacked -= 4294967296;
@@ -204,7 +204,7 @@ class Binary{
 
 	public static function readLInt(string str) -> long{
 		long unpacked;
-		let unpacked = ord(str[3]) * (long) 16777216 + ord(str[2]) * 65536 + ord(str[1]) * 256 + ord(str[0]);
+		let unpacked = (long) unpack("V", str)[1];
 		
 		if(unpacked > 2147483647){
 			let unpacked -= 4294967296;
