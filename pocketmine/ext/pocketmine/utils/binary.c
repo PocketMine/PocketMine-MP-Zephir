@@ -12,11 +12,11 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/operators.h"
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
-#include "kernel/hash.h"
 #include "kernel/array.h"
+#include "kernel/operators.h"
+#include "kernel/hash.h"
 #include "kernel/concat.h"
 #include "kernel/string.h"
 
@@ -37,8 +37,7 @@ PHP_METHOD(PocketMine_Utils_Binary, readTriad) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
 	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
-	char _0, _4, _6;
-	zval *str_param = NULL, _1 = zval_used_for_init, *_2 = NULL, *_5 = NULL, *_7 = NULL;
+	zval *str_param = NULL, _0, _1, *_2 = NULL, *_4;
 	zval *str = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -47,22 +46,15 @@ PHP_METHOD(PocketMine_Utils_Binary, readTriad) {
 	zephir_get_strval(str, str_param);
 
 
-	_0 = ZEPHIR_STRING_OFFSET(str, 0);
+	ZEPHIR_SINIT_VAR(_0);
+	ZVAL_STRING(&_0, "N", 0);
 	ZEPHIR_SINIT_VAR(_1);
-	ZVAL_LONG(&_1, _0);
-	ZEPHIR_CALL_FUNCTION(&_2, "ord", &_3, &_1);
+	ZVAL_STRING(&_1, "\x00", 0);
+	ZEPHIR_CALL_FUNCTION(&_2, "unpack", &_3, &_0, &_1, str);
 	zephir_check_call_status();
-	_4 = ZEPHIR_STRING_OFFSET(str, 1);
-	ZEPHIR_SINIT_NVAR(_1);
-	ZVAL_LONG(&_1, _4);
-	ZEPHIR_CALL_FUNCTION(&_5, "ord", &_3, &_1);
-	zephir_check_call_status();
-	_6 = ZEPHIR_STRING_OFFSET(str, 0);
-	ZEPHIR_SINIT_NVAR(_1);
-	ZVAL_LONG(&_1, _6);
-	ZEPHIR_CALL_FUNCTION(&_7, "ord", &_3, &_1);
-	zephir_check_call_status();
-	RETURN_MM_LONG((((zephir_get_numberval(_2) * 65536) + (zephir_get_numberval(_5) * 256)) + zephir_get_numberval(_7)));
+	ZEPHIR_OBS_VAR(_4);
+	zephir_array_fetch_long(&_4, _2, 1, PH_NOISY TSRMLS_CC);
+	RETURN_MM_LONG(zephir_get_intval(_4));
 
 }
 
@@ -509,11 +501,10 @@ PHP_METHOD(PocketMine_Utils_Binary, writeByte) {
 
 PHP_METHOD(PocketMine_Utils_Binary, readShort) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
-	char _0, _4;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
 	int unpacked, ZEPHIR_LAST_CALL_STATUS;
-	zend_bool isSigned, _6;
-	zval *str_param = NULL, *isSigned_param = NULL, _1 = zval_used_for_init, *_2 = NULL, *_5 = NULL;
+	zend_bool isSigned, _4;
+	zval *str_param = NULL, *isSigned_param = NULL, _0, *_1 = NULL, *_3;
 	zval *str = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -527,22 +518,18 @@ PHP_METHOD(PocketMine_Utils_Binary, readShort) {
 	}
 
 
-	_0 = ZEPHIR_STRING_OFFSET(str, 0);
-	ZEPHIR_SINIT_VAR(_1);
-	ZVAL_LONG(&_1, _0);
-	ZEPHIR_CALL_FUNCTION(&_2, "ord", &_3, &_1);
+	ZEPHIR_SINIT_VAR(_0);
+	ZVAL_STRING(&_0, "n", 0);
+	ZEPHIR_CALL_FUNCTION(&_1, "unpack", &_2, &_0, str);
 	zephir_check_call_status();
-	_4 = ZEPHIR_STRING_OFFSET(str, 1);
-	ZEPHIR_SINIT_NVAR(_1);
-	ZVAL_LONG(&_1, _4);
-	ZEPHIR_CALL_FUNCTION(&_5, "ord", &_3, &_1);
-	zephir_check_call_status();
-	unpacked = ((zephir_get_numberval(_2) * 256) + zephir_get_numberval(_5));
-	_6 = unpacked > 0x7fff;
-	if (_6) {
-		_6 = isSigned == 1;
+	ZEPHIR_OBS_VAR(_3);
+	zephir_array_fetch_long(&_3, _1, 1, PH_NOISY TSRMLS_CC);
+	unpacked = zephir_get_intval(_3);
+	_4 = unpacked > 0x7fff;
+	if (_4) {
+		_4 = isSigned == 1;
 	}
-	if (_6) {
+	if (_4) {
 		unpacked -= 0x10000;
 	}
 	RETURN_MM_LONG(unpacked);
@@ -577,11 +564,10 @@ PHP_METHOD(PocketMine_Utils_Binary, writeShort) {
 
 PHP_METHOD(PocketMine_Utils_Binary, readLShort) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
-	char _0, _4;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
 	int unpacked, ZEPHIR_LAST_CALL_STATUS;
-	zend_bool isSigned, _6;
-	zval *str_param = NULL, *isSigned_param = NULL, _1 = zval_used_for_init, *_2 = NULL, *_5 = NULL;
+	zend_bool isSigned, _4;
+	zval *str_param = NULL, *isSigned_param = NULL, _0, *_1 = NULL, *_3;
 	zval *str = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -595,22 +581,18 @@ PHP_METHOD(PocketMine_Utils_Binary, readLShort) {
 	}
 
 
-	_0 = ZEPHIR_STRING_OFFSET(str, 1);
-	ZEPHIR_SINIT_VAR(_1);
-	ZVAL_LONG(&_1, _0);
-	ZEPHIR_CALL_FUNCTION(&_2, "ord", &_3, &_1);
+	ZEPHIR_SINIT_VAR(_0);
+	ZVAL_STRING(&_0, "v", 0);
+	ZEPHIR_CALL_FUNCTION(&_1, "unpack", &_2, &_0, str);
 	zephir_check_call_status();
-	_4 = ZEPHIR_STRING_OFFSET(str, 0);
-	ZEPHIR_SINIT_NVAR(_1);
-	ZVAL_LONG(&_1, _4);
-	ZEPHIR_CALL_FUNCTION(&_5, "ord", &_3, &_1);
-	zephir_check_call_status();
-	unpacked = ((zephir_get_numberval(_2) * 256) + zephir_get_numberval(_5));
-	_6 = unpacked > 0x7fff;
-	if (_6) {
-		_6 = isSigned == 1;
+	ZEPHIR_OBS_VAR(_3);
+	zephir_array_fetch_long(&_3, _1, 1, PH_NOISY TSRMLS_CC);
+	unpacked = zephir_get_intval(_3);
+	_4 = unpacked > 0x7fff;
+	if (_4) {
+		_4 = isSigned == 1;
 	}
-	if (_6) {
+	if (_4) {
 		unpacked -= 0x10000;
 	}
 	RETURN_MM_LONG(unpacked);
@@ -646,10 +628,9 @@ PHP_METHOD(PocketMine_Utils_Binary, writeLShort) {
 PHP_METHOD(PocketMine_Utils_Binary, readInt) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
-	char _0, _4, _6, _8;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
 	long unpacked;
-	zval *str_param = NULL, _1 = zval_used_for_init, *_2 = NULL, *_5 = NULL, *_7 = NULL, *_9 = NULL;
+	zval *str_param = NULL, _0, *_1 = NULL, *_3;
 	zval *str = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -658,27 +639,13 @@ PHP_METHOD(PocketMine_Utils_Binary, readInt) {
 	zephir_get_strval(str, str_param);
 
 
-	_0 = ZEPHIR_STRING_OFFSET(str, 0);
-	ZEPHIR_SINIT_VAR(_1);
-	ZVAL_LONG(&_1, _0);
-	ZEPHIR_CALL_FUNCTION(&_2, "ord", &_3, &_1);
+	ZEPHIR_SINIT_VAR(_0);
+	ZVAL_STRING(&_0, "N", 0);
+	ZEPHIR_CALL_FUNCTION(&_1, "unpack", &_2, &_0, str);
 	zephir_check_call_status();
-	_4 = ZEPHIR_STRING_OFFSET(str, 1);
-	ZEPHIR_SINIT_NVAR(_1);
-	ZVAL_LONG(&_1, _4);
-	ZEPHIR_CALL_FUNCTION(&_5, "ord", &_3, &_1);
-	zephir_check_call_status();
-	_6 = ZEPHIR_STRING_OFFSET(str, 2);
-	ZEPHIR_SINIT_NVAR(_1);
-	ZVAL_LONG(&_1, _6);
-	ZEPHIR_CALL_FUNCTION(&_7, "ord", &_3, &_1);
-	zephir_check_call_status();
-	_8 = ZEPHIR_STRING_OFFSET(str, 3);
-	ZEPHIR_SINIT_NVAR(_1);
-	ZVAL_LONG(&_1, _8);
-	ZEPHIR_CALL_FUNCTION(&_9, "ord", &_3, &_1);
-	zephir_check_call_status();
-	unpacked = ((((zephir_get_numberval(_2) * 16777216) + (zephir_get_numberval(_5) * 65536)) + (zephir_get_numberval(_7) * 256)) + zephir_get_numberval(_9));
+	ZEPHIR_OBS_VAR(_3);
+	zephir_array_fetch_long(&_3, _1, 1, PH_NOISY TSRMLS_CC);
+	unpacked = zephir_get_intval(_3);
 	if (unpacked > 2147483647) {
 		unpacked -= 4294967296;
 	}
@@ -712,10 +679,9 @@ PHP_METHOD(PocketMine_Utils_Binary, writeInt) {
 PHP_METHOD(PocketMine_Utils_Binary, readLInt) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
-	char _0, _4, _6, _8;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
 	long unpacked;
-	zval *str_param = NULL, _1 = zval_used_for_init, *_2 = NULL, *_5 = NULL, *_7 = NULL, *_9 = NULL;
+	zval *str_param = NULL, _0, *_1 = NULL, *_3;
 	zval *str = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -724,27 +690,13 @@ PHP_METHOD(PocketMine_Utils_Binary, readLInt) {
 	zephir_get_strval(str, str_param);
 
 
-	_0 = ZEPHIR_STRING_OFFSET(str, 3);
-	ZEPHIR_SINIT_VAR(_1);
-	ZVAL_LONG(&_1, _0);
-	ZEPHIR_CALL_FUNCTION(&_2, "ord", &_3, &_1);
+	ZEPHIR_SINIT_VAR(_0);
+	ZVAL_STRING(&_0, "V", 0);
+	ZEPHIR_CALL_FUNCTION(&_1, "unpack", &_2, &_0, str);
 	zephir_check_call_status();
-	_4 = ZEPHIR_STRING_OFFSET(str, 2);
-	ZEPHIR_SINIT_NVAR(_1);
-	ZVAL_LONG(&_1, _4);
-	ZEPHIR_CALL_FUNCTION(&_5, "ord", &_3, &_1);
-	zephir_check_call_status();
-	_6 = ZEPHIR_STRING_OFFSET(str, 1);
-	ZEPHIR_SINIT_NVAR(_1);
-	ZVAL_LONG(&_1, _6);
-	ZEPHIR_CALL_FUNCTION(&_7, "ord", &_3, &_1);
-	zephir_check_call_status();
-	_8 = ZEPHIR_STRING_OFFSET(str, 0);
-	ZEPHIR_SINIT_NVAR(_1);
-	ZVAL_LONG(&_1, _8);
-	ZEPHIR_CALL_FUNCTION(&_9, "ord", &_3, &_1);
-	zephir_check_call_status();
-	unpacked = ((((zephir_get_numberval(_2) * 16777216) + (zephir_get_numberval(_5) * 65536)) + (zephir_get_numberval(_7) * 256)) + zephir_get_numberval(_9));
+	ZEPHIR_OBS_VAR(_3);
+	zephir_array_fetch_long(&_3, _1, 1, PH_NOISY TSRMLS_CC);
+	unpacked = zephir_get_intval(_3);
 	if (unpacked > 2147483647) {
 		unpacked -= 4294967296;
 	}
