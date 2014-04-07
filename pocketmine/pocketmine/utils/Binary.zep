@@ -49,18 +49,6 @@ class Binary{
 		return m . "\x7f";
 	}
 	
-	public static function writeSlot(<pocketmine\item\Item> item) -> string{
-		return self::writeShort(item->getID()) . chr(item->getCount()) . self::writeShort(item->getMetadata());
-	}
-	
-	public static function readSlot(var ob) -> <pocketmine\item\Item>{
-		int id = self::readShort(ob->get(2));
-		int cnt = ord(ob->get(1));
-		int meta = self::readShort(ob->get(2));
-		
-		return pocketmine\item\Item::get(id, meta, cnt);
-	}
-	
 	public static function readMetadata(string value, boolean types = true) -> array{
 		long offset = 1;
 		array m = [];
