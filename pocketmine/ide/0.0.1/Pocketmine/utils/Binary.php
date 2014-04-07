@@ -31,25 +31,25 @@ class Binary
 	public static function writeByte()    {
     }
 
-	public function readShort()    {
+	public static function readShort()    {
     }
 
-	public function writeShort()    {
+	public static function writeShort()    {
     }
 
-	public function readLShort()    {
+	public static function readLShort()    {
     }
 
-	public function writeLShort()    {
+	public static function writeLShort()    {
     }
 
-	public function readInt()    {
+	public static function readInt()    {
     }
 
 	public static function writeInt()    {
     }
 
-	public function readLInt()    {
+	public static function readLInt()    {
     }
 
 	public static function writeLInt()    {
