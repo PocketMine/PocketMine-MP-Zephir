@@ -5,8 +5,8 @@ class Binary{
 	const BIG_ENDIAN = 0x00;
 	const LITTLE_ENDIAN = 0x01;
 	
-	public static function readTriad(string str){
-		return unpack("N", "\x00", str)[1];
+	public static function readTriad(string str) -> long{
+		return (long) unpack("N", "\x00" . str)[1];
 	}
 	
 	public static function writeTriad(long value) -> string{
@@ -300,7 +300,7 @@ class Binary{
 		boolean negative = false;
 		
 		if(isSigned === true){
-			let negative = (ord(x[0]) & 0x80) > 0 ? true : false;
+			let negative = (x[0] & 0x80) > 0 ? true : false;
 			if(negative === true){
 				let x = self::__s_not(x);
 			}
@@ -308,7 +308,7 @@ class Binary{
 		
 		while i < 8 {
 			let value = bcmul(value, "4294967296", 0);
-			let value = bcadd(value, (long) 0x1000000 * ord(x[i]) + ord(x[i + 1]) * 65536 + ord(x[i + 2]) * 256 + ord(x[i + 3]), 0);
+			let value = bcadd(value, bcadd(bcadd(bcadd(bcmul("16777216", ord(x[i])), ord(x[i + 1]) * 65536),  ord(x[i + 2]) * 256), ord(x[i + 3])), 0);
 			let i += 4;
 		}
 		
