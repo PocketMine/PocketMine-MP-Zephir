@@ -52,9 +52,8 @@ PHP_METHOD(PocketMine_Utils_Binary, readTriad) {
 	ZVAL_STRING(&_1, "\x00", 0);
 	ZEPHIR_CALL_FUNCTION(&_2, "unpack", &_3, &_0, &_1, str);
 	zephir_check_call_status();
-	ZEPHIR_OBS_VAR(_4);
-	zephir_array_fetch_long(&_4, _2, 1, PH_NOISY TSRMLS_CC);
-	RETURN_MM_LONG(zephir_get_intval(_4));
+	zephir_array_fetch_long(&_4, _2, 1, PH_NOISY | PH_READONLY TSRMLS_CC);
+	RETURN_CTOR(_4);
 
 }
 
