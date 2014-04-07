@@ -6,7 +6,7 @@ class Binary{
 	const LITTLE_ENDIAN = 0x01;
 	
 	public static function readTriad(string str) -> long{
-		return (char) str[0] * (long) 65536 + (char) str[1] * 256 + (char) str[0];
+		return ord(str[0]) * (long) 65536 + ord(str[1]) * 256 + ord(str[0]);
 	}
 	
 	public static function writeTriad(long value) -> string{
@@ -119,7 +119,7 @@ class Binary{
 	}
 	
 	public static function readBool(string b) -> boolean{
-		return (char) b[0] === 0 ? false : true;
+		return ord(b[0]) === 0 ? false : true;
 	}
 	
 	public static function writeBool(boolean b) -> string{
@@ -128,7 +128,7 @@ class Binary{
 	
 	public static function readByte(string c, boolean isSigned = true) -> int{
 		int b;
-		let b = (char) c[0] * (int) 1;
+		let b = ord(c[0]) * (int) 1;
 		if(isSigned === true && (b & 0x80) > 0){
 			let b = -0x80 + (b & 0x7f);
 		}
@@ -146,7 +146,7 @@ class Binary{
 	
 	public function readShort(string str, boolean isSigned = true) -> int{
 		int unpacked;
-		let unpacked = (char) str[0] * (int) 256 + (char) str[1];
+		let unpacked = ord(str[0]) * (int) 256 + ord(str[1]);
 		
 		if(unpacked > 0x7fff && isSigned === true){
 			let unpacked -= 0x10000;
@@ -164,7 +164,7 @@ class Binary{
 	
 	public function readLShort(string str, boolean isSigned = true){
 		int unpacked;
-		let unpacked = (char) str[1] * (int) 256 + (char) str[0];
+		let unpacked = ord(str[1]) * (int) 256 + ord(str[0]);
 		
 		if(unpacked > 0x7fff && isSigned === true){
 			let unpacked -= 0x10000;
@@ -182,7 +182,7 @@ class Binary{
 
 	public function readInt(string str) -> long{
 		long unpacked;
-		let unpacked = (char) str[0] * (long) 16777216 + (char) str[1] * 65536 + (char) str[2] * 256 + (char) str[3];
+		let unpacked = ord(str[0]) * (long) 16777216 + ord(str[1]) * 65536 + ord(str[2]) * 256 + ord(str[3]);
 		
 		if(unpacked > 2147483647){
 			let unpacked -= 4294967296;
@@ -197,7 +197,7 @@ class Binary{
 
 	public function readLInt(string str) -> long{
 		long unpacked;
-		let unpacked = (char) str[3] * (long) 16777216 + (char) str[2] * 65536 + (char) str[1] * 256 + (char) str[0];
+		let unpacked = ord(str[3]) * (long) 16777216 + ord(str[2]) * 65536 + ord(str[1]) * 256 + ord(str[0]);
 		
 		if(unpacked > 2147483647){
 			let unpacked -= 4294967296;
@@ -282,7 +282,7 @@ class Binary{
 		int i = 0;
 		string r = "";
 		while(i < s->length()){
-			let r[i] = chr(-1 - (char) s[i]);
+			let r[i] = chr(-1 - ord(s[i]));
 		}
 		return r;
 	}
@@ -293,7 +293,7 @@ class Binary{
 		boolean negative = false;
 		
 		if(isSigned === true){
-			let negative = ((char) x[0] & 0x80) > 0 ? true : false;
+			let negative = (ord(x[0]) & 0x80) > 0 ? true : false;
 			if(negative === true){
 				let x = self::__s_not(x);
 			}
@@ -301,7 +301,7 @@ class Binary{
 		
 		while i < 8 {
 			let value = bcmul(value, "4294967296", 0);
-			let value = bcadd(value, (long) 0x1000000 * (char) x[i] + (((char) x[i + 1] * 65536) | ((char) x[i + 2] * 256) | (char) x[i + 3]), 0);
+			let value = bcadd(value, (long) 0x1000000 * ord(x[i]) + ((ord(x[i + 1]) * 65536) | (ord(x[i + 2]) * 256) | ord(x[i + 3])), 0);
 			let i += 4;
 		}
 		
