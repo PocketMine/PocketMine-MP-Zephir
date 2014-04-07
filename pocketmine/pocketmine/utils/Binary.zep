@@ -15,6 +15,9 @@ class Binary{
 	
 	public static function writeMetadata(array data) -> string{
 		string m = "";
+		int bottom;
+		var d;
+		
 		for bottom, d in data {
 			let m .= chr((d[0] * 32) | (bottom & 0x1f));
 			switch d[0]{
