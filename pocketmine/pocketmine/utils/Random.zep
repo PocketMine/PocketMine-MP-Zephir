@@ -32,11 +32,11 @@ class Random{
 	}
 	
 	public function nextFloat() -> float{
-		return this->nextInt() / 2147483647.0;
+		return (float) this->nextInt() / (float) 0x7fffffff;
 	}
 	
 	public function nextSignedFloat() -> float{
-		return this->nextSignedInt() / 2147483647.0;
+		return (float) this->nextSignedInt() / (float) 0x7fffffff;
 	}
 	
 	public function nextBoolean() -> boolean{
@@ -44,9 +44,7 @@ class Random{
 	}
 	
 	public function nextRange(int start = 0, int end = 0x7fffffff) -> int{
-		int limit;
-		let limit = end + 1 - start;
-		return start + ((int) this->nextInt() % limit);
+		return start + ((int) this->nextInt() % (end + 1 - start));
 	}
 
 }
