@@ -19,7 +19,7 @@ class Binary{
 		var bottom;
 		var d;		
 		for bottom, d in data {
-			let m .= chr((d[0] * 32) | (bottom & 0x1f));
+			let m .= chr((d[0] * 32) + (bottom & 0x1f));
 			switch d[0]{
 				case 0:
 					let m .= self::writeByte(d[1]);
@@ -55,56 +55,56 @@ class Binary{
 	public static function readMetadata(string value, boolean types = true) -> array{
 		long offset = 1;
 		array m = [];
-		int b;
+		uchar b;
 		int bottom;
 		int type;
 		var r;
-		int len;
+		var len;
 		
-		let b = ord(value[0]);
+		let b = value[0];
 		
-		while b !== 127 && isset(value[offset]) {
+		while b !== 127 && value[offset] !== 0 {
 			let bottom = b & 0x1f;
 			let type = (b & 0xe0) / 32;
 			switch type {
 				case 0:
-					let r = self::readByte(value[offset]);
+					let r = self::readByte(ord(value[offset]));
 					let offset++;
 					break;
 				case 1:
-					let r = self::readLShort(value[offset] . value[offset + 1]);
+					let r = self::readLShort(substr(value, offset, 2));
 					let offset += 2;
 					break;
 				case 2:
-					let r = self::readLInt(value[offset] . value[offset + 1] . value[offset + 2] . value[offset + 3]);
+					let r = self::readLInt(substr(value, offset, 4));
 					let offset += 4;
 					break;
 				case 3:
-					let r = self::readLFloat(value[offset] . value[offset + 1] . value[offset + 2] . value[offset + 3]);
+					let r = self::readLFloat(substr(value, offset, 4));
 					let offset += 4;
 					break;
 				case 4:
-					let len = self::readLShort(value[offset] . value[offset + 1]);
+					let len = self::readLShort(substr(value, offset, 2));
 					let offset += 2;
 					let r = substr(value, offset, len);
 					let offset += len;
 					break;
 				case 5:
 					let r = [];
-					let r[] = self::readLShort(value[offset] . value[offset + 1]);
+					let r[] = self::readLShort(substr(value, offset, 2));
 					let offset += 2;
 					let r[] = ord(value[offset]);
 					let offset++;
-					let r[] = self::readLShort(value[offset] . value[offset + 1]);
+					let r[] = self::readLShort(substr(value, offset, 2));
 					let offset += 2;
 					break;
 				case 6:
 					let r = [];
-					let r[] = self::readLFloat(value[offset] . value[offset + 1] . value[offset + 2] . value[offset + 3]);
+					let r[] = self::readLInt(substr(value, offset, 4));
 					let offset += 4;
-					let r[] = self::readLFloat(value[offset] . value[offset + 1] . value[offset + 2] . value[offset + 3]);
+					let r[] = self::readLInt(substr(value, offset, 4));
 					let offset += 4;
-					let r[] = self::readLFloat(value[offset] . value[offset + 1] . value[offset + 2] . value[offset + 3]);
+					let r[] = self::readLInt(substr(value, offset, 4));
 					let offset += 4;
 					break;
 			}
@@ -114,7 +114,7 @@ class Binary{
 			}else{
 				let m[bottom] = r;
 			}
-			let b = ord(value[offset]);
+			let b = value[offset];
 			let offset++;
 		}
 		
@@ -122,11 +122,15 @@ class Binary{
 	}
 	
 	public static function readBool(string b) -> boolean{
-		return ord(b[0]) === 0 ? false : true;
+		return b[0] === 0 ? false : true;
 	}
 	
-	public static function writeBool(boolean b) -> string{
-		return chr(b === true ? 1 : 0);
+	public static function writeBool(boolean b){
+		if(b === true){
+			return "\x01";
+		}else{
+			return "\x00";
+		}
 	}
 	
 	public static function readByte(string c, boolean isSigned = true) -> int{
@@ -213,7 +217,7 @@ class Binary{
 		return pack("V", value);
 	}
 	
-	public static function readFloat(string str) -> float{
+	public static function readFloat(string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("f", str)[1];
 		}else{
@@ -221,7 +225,7 @@ class Binary{
 		}
 	}
 	
-	public static function writeFloat(float value) -> string{
+	public static function writeFloat(float value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("f", value);
 		}else{
@@ -229,7 +233,7 @@ class Binary{
 		}
 	}
 	
-	public static function readLFloat(string str) -> float{
+	public static function readLFloat(string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("f", str->rev())[1];
 		}else{
@@ -237,7 +241,7 @@ class Binary{
 		}
 	}
 	
-	public static function writeLFloat(float value) -> string{
+	public static function writeLFloat(float value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("f", value)->rev();
 		}else{
@@ -245,11 +249,11 @@ class Binary{
 		}
 	}
 	
-	public static function printFloat(float value) -> string{
+	public static function printFloat(float value){
 		return preg_replace("/(\\.\\d+?)0+$/", "$1", sprintf("%F", value));
 	}
 	
-	public static function readDouble(string str) -> double{
+	public static function readDouble(string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("d", str)[1];
 		}else{
@@ -257,7 +261,7 @@ class Binary{
 		}
 	}
 	
-	public static function writeDouble(double value) -> double{
+	public static function writeDouble(double value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("d", value);
 		}else{
@@ -265,7 +269,7 @@ class Binary{
 		}
 	}
 	
-	public static function readLDouble(string str) -> double{
+	public static function readLDouble(string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("d", str->rev())[1];
 		}else{
@@ -273,7 +277,7 @@ class Binary{
 		}
 	}
 	
-	public static function writeLDouble(double value) -> double{
+	public static function writeLDouble(double value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("d", value)->rev();
 		}else{
@@ -285,13 +289,13 @@ class Binary{
 		int i = 0;
 		string r = "";
 		while(i < s->length()){
-			let r[i] = chr(-1 - ord(s[i]));
+			let r .= chr(-1 - ord(s[i]));
 		}
 		return r;
 	}
 
-	public static function readLong(string x, boolean isSigned = true) -> string{
-		string value = "0";
+	public static function readLong(var x, boolean isSigned = true){
+		var value = "0";
 		int i = 0;
 		boolean negative = false;
 		
@@ -304,15 +308,15 @@ class Binary{
 		
 		while i < 8 {
 			let value = bcmul(value, "4294967296", 0);
-			let value = bcadd(value, (long) 0x1000000 * ord(x[i]) + ((ord(x[i + 1]) * 65536) | (ord(x[i + 2]) * 256) | ord(x[i + 3])), 0);
+			let value = bcadd(value, (long) 0x1000000 * ord(x[i]) + ord(x[i + 1]) * 65536 + ord(x[i + 2]) * 256 + ord(x[i + 3]), 0);
 			let i += 4;
 		}
 		
 		return negative === true ? "-" . value : value;
 	}
 	
-	public static function writeLong(string value) -> string{
-		string x = "";
+	public static function writeLong(var value){
+		var x = "";
 		long temp;
 		boolean negative = false;
 		
@@ -339,11 +343,12 @@ class Binary{
 		return x;
 	}
 	
-	public static function readLLong(string str) -> string{
+	public static function readLLong(string str){
 		return self::readLong(str->rev());
 	}
 	
-	public static function writeLLong(string value) -> string{
+	public static function writeLLong(string value){
 		return self::writeLong(value)->rev();
 	}
 }
+
