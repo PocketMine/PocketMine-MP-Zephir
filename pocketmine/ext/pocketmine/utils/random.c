@@ -117,7 +117,7 @@ PHP_METHOD(PocketMine_Utils_Random, nextFloat) {
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "nextint",  NULL);
 	zephir_check_call_status();
-	RETURN_MM_DOUBLE((zephir_get_numberval(_0) / 2147483647.0));
+	RETURN_MM_DOUBLE((zephir_get_doubleval(_0) / 2147483647.0));
 
 }
 
@@ -130,7 +130,7 @@ PHP_METHOD(PocketMine_Utils_Random, nextSignedFloat) {
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "nextsignedint",  NULL);
 	zephir_check_call_status();
-	RETURN_MM_DOUBLE((zephir_get_numberval(_0) / 2147483647.0));
+	RETURN_MM_DOUBLE((zephir_get_doubleval(_0) / 2147483647.0));
 
 }
 
@@ -150,7 +150,7 @@ PHP_METHOD(PocketMine_Utils_Random, nextBoolean) {
 PHP_METHOD(PocketMine_Utils_Random, nextRange) {
 
 	zval *start_param = NULL, *end_param = NULL, *_0 = NULL;
-	int start, end, limit, ZEPHIR_LAST_CALL_STATUS;
+	int start, end, ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 2, &start_param, &end_param);
@@ -167,10 +167,9 @@ PHP_METHOD(PocketMine_Utils_Random, nextRange) {
 	}
 
 
-	limit = ((end + 1) - start);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "nextint",  NULL);
 	zephir_check_call_status();
-	RETURN_MM_LONG((start + (zephir_get_numberval(_0) % limit)));
+	RETURN_MM_LONG((start + (zephir_get_intval(_0) % (((end + 1) - start)))));
 
 }
 
