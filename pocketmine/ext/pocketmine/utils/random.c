@@ -150,7 +150,7 @@ PHP_METHOD(PocketMine_Utils_Random, nextBoolean) {
 PHP_METHOD(PocketMine_Utils_Random, nextRange) {
 
 	zval *start_param = NULL, *end_param = NULL, *_0 = NULL;
-	int start, end, ZEPHIR_LAST_CALL_STATUS;
+	int start, end, limit, ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 2, &start_param, &end_param);
@@ -167,9 +167,10 @@ PHP_METHOD(PocketMine_Utils_Random, nextRange) {
 	}
 
 
+	limit = ((end + 1) - start);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "nextint",  NULL);
 	zephir_check_call_status();
-	RETURN_MM_LONG((start + (zephir_get_numberval(_0) % (((end + 1) - start)))));
+	RETURN_MM_LONG((start + (zephir_get_numberval(_0) % limit)));
 
 }
 
