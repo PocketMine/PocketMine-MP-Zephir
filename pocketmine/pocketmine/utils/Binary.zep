@@ -118,7 +118,7 @@ class Binary{
 		return m;
 	}
 	
-	public static function readDataArray(string str, int len = 10, &offset = 0) -> array{
+	public static function readDataArray(string str, int len = 10, & offset = 0) -> array{
 		array data = [];
 		int i = 1;
 		int l;
