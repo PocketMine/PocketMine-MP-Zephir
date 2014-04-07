@@ -15,9 +15,9 @@ class Binary{
 	
 	public static function writeMetadata(array data) -> string{
 		string m = "";
-		int bottom;
-		var d;
 		
+		var bottom;
+		var d;		
 		for bottom, d in data {
 			let m .= chr((d[0] * 32) | (bottom & 0x1f));
 			switch d[0]{
@@ -217,7 +217,7 @@ class Binary{
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("f", str)[1];
 		}else{
-			return unpack("f", str[3] . str[2] . str[1] . str[0])[1];
+			return unpack("f", str->rev())[1];
 		}
 	}
 	
@@ -225,13 +225,13 @@ class Binary{
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("f", value);
 		}else{
-			return strrev(pack("f", value));
+			return pack("f", value)->rev();
 		}
 	}
 	
 	public static function readLFloat(string str) -> float{
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
-			return unpack("f", str[3] . str[2] . str[1] . str[0])[1];
+			return unpack("f", str->rev())[1];
 		}else{
 			return unpack("f", str)[1];
 		}
@@ -239,7 +239,7 @@ class Binary{
 	
 	public static function writeLFloat(float value) -> string{
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
-			return strrev(pack("f", value));
+			return pack("f", value)->rev();
 		}else{
 			return pack("f", value);
 		}
@@ -253,7 +253,7 @@ class Binary{
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("d", str)[1];
 		}else{
-			return unpack("d", str[7] . str[6] . str[5] . str[4] . str[3] . str[2] . str[1] . str[0])[1];
+			return unpack("d", str->rev())[1];
 		}
 	}
 	
@@ -261,13 +261,13 @@ class Binary{
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("d", value);
 		}else{
-			return strrev(pack("d", value));
+			return pack("d", value)->rev();
 		}
 	}
 	
 	public static function readLDouble(string str) -> double{
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
-			return unpack("d", str[7] . str[6] . str[5] . str[4] . str[3] . str[2] . str[1] . str[0])[1];
+			return unpack("d", str->rev())[1];
 		}else{
 			return unpack("d", str)[1];
 		}
@@ -275,7 +275,7 @@ class Binary{
 	
 	public static function writeLDouble(double value) -> double{
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
-			return strrev(pack("d", value));
+			return pack("d", value)->rev();
 		}else{
 			return pack("d", value);
 		}
@@ -340,10 +340,10 @@ class Binary{
 	}
 	
 	public static function readLLong(string str) -> string{
-		return self::readLong(strrev(str));
+		return self::readLong(str->rev());
 	}
 	
 	public static function writeLLong(string value) -> string{
-		return strrev(self::writeLong(value));
+		return self::writeLong(value)->rev();
 	}
 }
