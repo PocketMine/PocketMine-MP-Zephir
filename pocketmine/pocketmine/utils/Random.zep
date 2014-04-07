@@ -46,7 +46,7 @@ class Random{
 	public function nextRange(int start = 0, int end = 0x7fffffff) -> int{
 		int limit;
 		let limit = end + 1 - start;
-		return start + (this->nextInt() % limit);
+		return start + ((int) this->nextInt() % limit);
 	}
 
 }
