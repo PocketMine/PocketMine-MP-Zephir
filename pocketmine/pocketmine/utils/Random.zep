@@ -40,7 +40,7 @@ class Random{
 	}
 	
 	public function nextBoolean() -> boolean{
-		return (this->nextSignedInt() & 0x01) == 0;
+		return this->nextSignedInt() >= 0;
 	}
 	
 	public function nextRange(int start = 0, int end = 0x7fffffff) -> int{
