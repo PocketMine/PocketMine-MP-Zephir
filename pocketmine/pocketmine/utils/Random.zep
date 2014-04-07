@@ -32,11 +32,11 @@ class Random{
 	}
 	
 	public function nextFloat() -> float{
-		return (float) this->nextInt() / (float) 0x7fffffff;
+		return (float) this->nextInt() / 2147483647.0;
 	}
 	
 	public function nextSignedFloat() -> float{
-		return (float) this->nextSignedInt() / (float) 0x7fffffff;
+		return (float) this->nextSignedInt() / 2147483647.0;
 	}
 	
 	public function nextBoolean() -> boolean{
