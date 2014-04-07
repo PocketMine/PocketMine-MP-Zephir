@@ -3,8 +3,8 @@ namespace pocketmine\utils;
 
 class Random{
 	
-	protected int z;
-	protected int w;
+	protected z = 0;
+	protected w = 0;
 	
 	public function __construct(int seed){
 		this->setSeed(seed);
