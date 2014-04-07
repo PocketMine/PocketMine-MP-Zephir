@@ -1,5 +1,5 @@
 
-namespace pocketmine\Utils;
+namespace PocketMine\Utils;
 
 class Random{
 	
