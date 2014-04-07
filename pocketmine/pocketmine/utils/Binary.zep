@@ -301,7 +301,7 @@ class Binary{
 		
 		while i < 8 {
 			let value = bcmul(value, "4294967296", 0);
-			let value = bcadd(value, (long) 0x1000000 * (char) x[i] + (((char) x[i + 1] * 65536) | ((char) x[i + 2] * 256) | (char) x[i + 3], 0);
+			let value = bcadd(value, (long) 0x1000000 * (char) x[i] + (((char) x[i + 1] * 65536) | ((char) x[i + 2] * 256) | (char) x[i + 3]), 0);
 			let i += 4;
 		}
 		
