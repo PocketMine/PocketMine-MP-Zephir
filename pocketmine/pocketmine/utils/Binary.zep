@@ -52,11 +52,13 @@ class Binary{
 	public static function readMetadata(string value, boolean types = true) -> array{
 		long offset = 1;
 		array m = [];
-		int b = ord(value[0]);
+		int b;
 		int bottom;
 		int type;
 		var r;
 		int len;
+		
+		let b = ord(value[0]);
 		
 		while b !== 127 and isset(value[offset]) {
 			let bottom = b & 0x1f;
@@ -151,7 +153,8 @@ class Binary{
 	}
 	
 	public static function readByte(string c, boolean isSigned = true) -> int{
-		int b = (char) c[0] * (int) 1;
+		int b;
+		let b = (char) c[0] * (int) 1;
 		if(isSigned === true and (b & 0x80) > 0){
 			let b = -0x80 + (b & 0x7f);
 		}
@@ -168,7 +171,8 @@ class Binary{
 	}
 	
 	public function readShort(string str, boolean isSigned = true) -> int{
-		int unpacked = (char) str[0] * (int) 256 + (char) str[1];
+		int unpacked;
+		let unpacked = (char) str[0] * (int) 256 + (char) str[1];
 		
 		if(unpacked > 0x7fff and isSigned === true){
 			unpacked -= 0x10000;
@@ -185,7 +189,8 @@ class Binary{
 	}
 	
 	public function readLShort(string str, boolean isSigned = true){
-		int unpacked = (char) str[1] * (int) 256 + (char) str[0];
+		int unpacked;
+		let unpacked = (char) str[1] * (int) 256 + (char) str[0];
 		
 		if(unpacked > 0x7fff and isSigned === true){
 			unpacked -= 0x10000;
@@ -202,7 +207,8 @@ class Binary{
 	}
 
 	public function readInt(string str) -> long{
-		long unpacked = (char) str[0] * (long) 16777216 + (char) str[1] * 65536 + (char) str[2] * 256 + (char) str[3];
+		long unpacked;
+		let unpacked = (char) str[0] * (long) 16777216 + (char) str[1] * 65536 + (char) str[2] * 256 + (char) str[3];
 		
 		if(unpacked > 2147483647){
 			unpacked -= 4294967296;
@@ -216,7 +222,8 @@ class Binary{
 	}
 
 	public function readLInt(string str) -> long{
-		long unpacked = (char) str[3] * (long) 16777216 + (char) str[2] * 65536 + (char) str[1] * 256 + (char) str[0];
+		long unpacked;
+		let unpacked = (char) str[3] * (long) 16777216 + (char) str[2] * 65536 + (char) str[1] * 256 + (char) str[0];
 		
 		if(unpacked > 2147483647){
 			unpacked -= 4294967296;
