@@ -242,7 +242,7 @@ class Binary{
 		}
 	}
 	
-	public static function printFloat(float value) -> string){
+	public static function printFloat(float value) -> string{
 		return preg_replace("/(\\.\\d+?)0+$/", "$1", sprintf("%F", value));
 	}
 	
