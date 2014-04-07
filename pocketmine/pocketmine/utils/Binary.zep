@@ -1,0 +1,368 @@
+
+namespace PocketMine\Utils;
+
+class Binary{
+	const BIG_ENDIAN = 0x00;
+	const LITTLE_ENDIAN = 0x01;
+	
+	public static function readTriad(string str) -> long{
+		return (char) str[0] * (long) 65536 + (char) str[1] * 256 + (char) str[0];
+	}
+	
+	public static function writeTriad(long value) -> string{
+		return substr(pack("N", value), 1);
+	}
+	
+	public static function writeMetadata(array data) -> string{
+		string m = "";
+		for bottom, d in data {
+			let m .= chr((d[0] * 32) | (bottom & 0x1f));
+			switch d[0]{
+				case 0:
+					let m .= self::writeByte(d[1]);
+					break;
+				case 1:
+					let m .= self::writeLShort(d[1]);
+					break;
+				case 2:
+					let m .= self::writeLInt(d[1]);
+					break;
+				case 3:
+					let m .= self::writeLFloat(d[1]);
+					break;
+				case 4:
+					let m .= self::writeLShort(d[1]) . d[1];
+					break;
+				case 5:
+					let m .= self::writeLShort(d[1][0]);
+					let m .= self::writeByte(d[1][1]);
+					let m .= self::writeLShort(d[1][2]);
+					break;
+				case 6:
+					let m .= self::writeLInt(d[1][0]);
+					let m .= self::writeLInt(d[1][1]);
+					let m .= self::writeLInt(d[1][2]);
+					break;
+			}
+		}
+		
+		return m . "\x7f";
+	}
+	
+	public static function writeSlot(<pocketmine\item\Item> item) -> string{
+		return self::writeShort(item->getID()) . chr(item->getCount()) . self::writeShort(item->getMetadata());
+	}
+	
+	public static function readSlot(var ob) -> <pocketmine\item\Item>{
+		int id = self::readShort(ob->get(2));
+		int cnt = ord(ob->get(1));
+		int meta = self::readShort(ob->get(2));
+		
+		return pocketmine\item\Item::get(id, meta, cnt);
+	}
+	
+	public static function readMetadata(string value, boolean types = true) -> array{
+		long offset = 1;
+		array m = [];
+		int b = ord(value[0]);
+		int bottom;
+		int type;
+		var r;
+		int len;
+		
+		while b !== 127 and isset(value[offset]) {
+			let bottom = b & 0x1f;
+			let type = (b & 0xe0) / 32;
+			switch type {
+				case 0:
+					let r = self::readByte(value[offset]);
+					let offset++;
+					break;
+				case 1:
+					let r = self::readLShort(value[offset] . value[offset + 1]);
+					let offset += 2;
+					break;
+				case 2:
+					let r = self::readLInt(value[offset] . value[offset + 1] . value[offset + 2] . value[offset + 3]);
+					let offset += 4;
+					break;
+				case 3:
+					let r = self::readLFloat(value[offset] . value[offset + 1] . value[offset + 2] . value[offset + 3]);
+					let offset += 4;
+					break;
+				case 4:
+					let len = self::readLShort(value[offset] . value[offset + 1]);
+					let offset += 2;
+					let r = substr(value, offset, len);
+					let offset += len;
+					break;
+				case 5:
+					let r = [];
+					let r[] = self::readLShort(value[offset] . value[offset + 1]);
+					let offset += 2;
+					let r[] = ord(value[offset]);
+					let offset++;
+					let r[] = self::readLShort(value[offset] . value[offset + 1]);
+					let offset += 2;
+					break;
+				case 6:
+					let r = [];
+					let r[] = self::readLFloat(value[offset] . value[offset + 1] . value[offset + 2] . value[offset + 3]);
+					let offset += 4;
+					let r[] = self::readLFloat(value[offset] . value[offset + 1] . value[offset + 2] . value[offset + 3]);
+					let offset += 4;
+					let r[] = self::readLFloat(value[offset] . value[offset + 1] . value[offset + 2] . value[offset + 3]);
+					let offset += 4;
+					break;
+			}
+			
+			if(types === true){
+				let m[bottom] = [r, type];
+			}else{
+				let m[bottom] = r;
+			}
+			let b = ord(value[offset]);
+			let offset++;
+		}
+		
+		return m;
+	}
+	
+	public static function readDataArray(string str, int len = 10, int &offset = 0) -> array{
+		array data = [];
+		int i = 1;
+		int l;
+		let offset = 0;
+
+		while i < len and isset(str[offset]) {
+			let l = self::readTriad(str[offset] . str[offset + 1] . str[offset + 2]);
+			let offset += 3;
+			let data[] = substr(str, offset, l);
+			let offset += l;
+			let i++;
+		}
+		
+		return data;
+	}
+	
+	public static function writeDataArray(array data) -> string{
+		string raw = "";
+		for v in data {
+			let raw .= self::writeTriad(strlen(v)) . v;
+		}
+		
+		return raw;
+	}
+	
+	public static function readBool(string b) -> boolean{
+		return (char) b[0] === 0 ? false : true;
+	}
+	
+	public static function writeBool(boolean b) -> string{
+		return chr(b === true ? 1 : 0);
+	}
+	
+	public static function readByte(string c, boolean isSigned = true) -> int{
+		int b = (char) c[0] * (int) 1;
+		if(isSigned === true and (b & 0x80) > 0){
+			let b = -0x80 + (b & 0x7f);
+		}
+		
+		return b;
+	}
+	
+	public static function writeByte(int c) -> string{
+		if(c < 0 and c >= -0x80){
+			let c = 0xff + c + 1;
+		}
+		
+		return chr(c);
+	}
+	
+	public function readShort(string str, boolean isSigned = true) -> int{
+		int unpacked = (char) str[0] * (int) 256 + (char) str[1];
+		
+		if(unpacked > 0x7fff and isSigned === true){
+			unpacked -= 0x10000;
+		}
+		
+		return unpacked;
+	}
+	
+	public function writeShort(long value) -> string{
+		if(value < 0){
+			value += 0x10000;
+		}
+		return pack("n", value);
+	}
+	
+	public function readLShort(string str, boolean isSigned = true){
+		int unpacked = (char) str[1] * (int) 256 + (char) str[0];
+		
+		if(unpacked > 0x7fff and isSigned === true){
+			unpacked -= 0x10000;
+		}
+		
+		return unpacked;
+	}
+	
+	public function writeLShort(long value) -> string{
+		if(value < 0){
+			value += 0x10000;
+		}
+		return pack("v", value);
+	}
+
+	public function readInt(string str) -> long{
+		long unpacked = (char) str[0] * (long) 16777216 + (char) str[1] * 65536 + (char) str[2] * 256 + (char) str[3];
+		
+		if(unpacked > 2147483647){
+			unpacked -= 4294967296;
+		}
+		
+		return unpacked;
+	}
+	
+	public static function writeInt(long value) -> string{
+		return pack("N", value);
+	}
+
+	public function readLInt(string str) -> long{
+		long unpacked = (char) str[3] * (long) 16777216 + (char) str[2] * 65536 + (char) str[1] * 256 + (char) str[0];
+		
+		if(unpacked > 2147483647){
+			unpacked -= 4294967296;
+		}
+		
+		return unpacked;
+	}
+	
+	public static function writeLInt(long value) -> string{
+		return pack("V", value);
+	}
+	
+	public static function readFloat(string str) -> float{
+		if unlikely ENDIANNESS === self::BIG_ENDIAN{
+			return unpack("f", str)[1];
+		}else{
+			return unpack("f", str[3] . str[2] . str[1] . str[0])[1];
+		}
+	}
+	
+	public static function writeFloat(float value) -> string{
+		if unlikely ENDIANNESS === self::BIG_ENDIAN{
+			return pack("f", value);
+		}else{
+			return strrev(pack("f", value));
+		}
+	}
+	
+	public static function readLFloat(string str) -> float{
+		if unlikely ENDIANNESS === self::BIG_ENDIAN{
+			return unpack("f", str[3] . str[2] . str[1] . str[0])[1];
+		}else{
+			return unpack("f", str)[1];
+		}
+	}
+	
+	public static function writeLFloat(float value) -> string{
+		if unlikely ENDIANNESS === self::BIG_ENDIAN{
+			return strrev(pack("f", value));
+		}else{
+			return pack("f", value);
+		}
+	}
+	
+	public static function printFloat(float value) -> string){
+		return preg_replace("/(\\.\\d+?)0+$/", "$1", sprintf("%F", value));
+	}
+	
+	public static function readDouble(string str) -> double{
+		if unlikely ENDIANNESS === self::BIG_ENDIAN{
+			return unpack("d", str)[1];
+		}else{
+			return unpack("d", str[7] . str[6] . str[5] . str[4] . str[3] . str[2] . str[1] . str[0])[1];
+		}
+	}
+	
+	public static function writeDouble(double value) -> double{
+		if unlikely ENDIANNESS === self::BIG_ENDIAN{
+			return pack("d", value);
+		}else{
+			return strrev(pack("d", value));
+		}
+	}
+	
+	public static function readLDouble(string str) -> double{
+		if unlikely ENDIANNESS === self::BIG_ENDIAN{
+			return unpack("d", str[7] . str[6] . str[5] . str[4] . str[3] . str[2] . str[1] . str[0])[1];
+		}else{
+			return unpack("d", str)[1];
+		}
+	}
+	
+	public static function writeLDouble(double value) -> double{
+		if unlikely ENDIANNESS === self::BIG_ENDIAN{
+			return strrev(pack("d", value));
+		}else{
+			return pack("d", value);
+		}
+	}
+
+	public static function readLong(string x, boolean isSigned = true) -> string{
+		string value = "0";
+		int i = 0;
+		boolean negative = false;
+		
+		if(isSigned === true){
+			let negative = ((char) x[0] & 0x80) > 0 ? true : false;
+			if(negative === true){
+				let x = ~x;
+			}
+		}
+		
+		while i < 8 {
+			let value = bcmul(value, "4294967296", 0);
+			let value = bcadd(value, (long) 0x1000000 * (char) x[i] + (((char) x[i + 1] * 65536) | ((char) x[i + 2] * 256) | (char) x[i + 3], 0);
+			let i += 4;
+		}
+		
+		return negative === true ? "-" . value : value;
+	}
+	
+	public static function writeLong(string value) -> string{
+		string x = "";
+		long temp;
+		boolean negative = false;
+		
+		if(value[0] === "-"){
+			let negative = true;
+			let value = bcadd(value, "1");
+			if(value[0] === "-"){
+				let value = substr(value, 1);
+			}
+		}
+		
+		while bccomp(value, "0", 0) > 0 {
+			let temp = intval(bcmod(value, "16777216"));
+			let x = chr((temp & 0xFF0000) / 65536) . chr((temp & 0xFF00) / 256) . chr(temp & 0xFF) . x;
+			value = bcdiv(value, "16777216", 0);
+		}
+		
+		let x = str_pad(substr(x, 0, 8), 8, "\x00", STR_PAD_LEFT);
+		
+		if(negative === true){
+			let x = ~x;
+		}
+		
+		return x;
+	}
+	
+	public static function readLLong(string str) -> string{
+		return self::readLong(strrev(str));
+	}
+	
+	public static function writeLLong(string value) -> string{
+		return strrev(self::writeLong(value));
+	}
+}
