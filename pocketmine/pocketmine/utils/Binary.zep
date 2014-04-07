@@ -5,8 +5,8 @@ class Binary{
 	const BIG_ENDIAN = 0x00;
 	const LITTLE_ENDIAN = 0x01;
 	
-	public static function readTriad(string str) -> long{
-		return (long) unpack("N", "\x00", str)[1];
+	public static function readTriad(string str){
+		return unpack("N", "\x00", str)[1];
 	}
 	
 	public static function writeTriad(long value) -> string{
