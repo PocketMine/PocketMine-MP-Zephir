@@ -221,7 +221,7 @@ PHP_METHOD(PocketMine_Level_Generator_Noise_Generator, noise2D) {
 		freq *= zephir_get_numberval(_5);
 		_6 = zephir_fetch_nproperty_this(this_ptr, SL("amplitude"), PH_NOISY_CC);
 		amp *= zephir_get_numberval(_6);
-		i--;
+		i++;
 	}
 	if (normalized == 1) {
 		result = (result / max);
@@ -270,7 +270,7 @@ PHP_METHOD(PocketMine_Level_Generator_Noise_Generator, noise3D) {
 		freq *= zephir_get_numberval(_6);
 		_7 = zephir_fetch_nproperty_this(this_ptr, SL("amplitude"), PH_NOISY_CC);
 		amp *= zephir_get_numberval(_7);
-		i--;
+		i++;
 	}
 	if (normalized == 1) {
 		result = (result / max);

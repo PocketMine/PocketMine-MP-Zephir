@@ -766,7 +766,7 @@ PHP_METHOD(PocketMine_Utils_Binary, readFloat) {
 PHP_METHOD(PocketMine_Utils_Binary, writeFloat) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL, *_5 = NULL;
 	zval *value_param = NULL, *_0, _1 = zval_used_for_init, _2 = zval_used_for_init, *_4 = NULL;
 	double value;
 
@@ -793,7 +793,7 @@ PHP_METHOD(PocketMine_Utils_Binary, writeFloat) {
 		ZVAL_DOUBLE(&_2, value);
 		ZEPHIR_CALL_FUNCTION(&_4, "pack", &_3, &_1, &_2);
 		zephir_check_call_status();
-		ZEPHIR_RETURN_CALL_METHOD(_4, "rev", NULL);
+		ZEPHIR_RETURN_CALL_FUNCTION("strrev", &_5, _4);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
@@ -840,7 +840,7 @@ PHP_METHOD(PocketMine_Utils_Binary, readLFloat) {
 PHP_METHOD(PocketMine_Utils_Binary, writeLFloat) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_4 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_4 = NULL, *_5 = NULL;
 	zval *value_param = NULL, *_0, _1 = zval_used_for_init, _2 = zval_used_for_init, *_3 = NULL;
 	double value;
 
@@ -859,7 +859,7 @@ PHP_METHOD(PocketMine_Utils_Binary, writeLFloat) {
 		ZVAL_DOUBLE(&_2, value);
 		ZEPHIR_CALL_FUNCTION(&_3, "pack", &_4, &_1, &_2);
 		zephir_check_call_status();
-		ZEPHIR_RETURN_CALL_METHOD(_3, "rev", NULL);
+		ZEPHIR_RETURN_CALL_FUNCTION("strrev", &_5, _3);
 		zephir_check_call_status();
 		RETURN_MM();
 	} else {
@@ -943,7 +943,7 @@ PHP_METHOD(PocketMine_Utils_Binary, readDouble) {
 PHP_METHOD(PocketMine_Utils_Binary, writeDouble) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL, *_5 = NULL;
 	zval *value_param = NULL, *_0, _1 = zval_used_for_init, _2 = zval_used_for_init, *_4 = NULL;
 	double value;
 
@@ -970,7 +970,7 @@ PHP_METHOD(PocketMine_Utils_Binary, writeDouble) {
 		ZVAL_DOUBLE(&_2, value);
 		ZEPHIR_CALL_FUNCTION(&_4, "pack", &_3, &_1, &_2);
 		zephir_check_call_status();
-		ZEPHIR_RETURN_CALL_METHOD(_4, "rev", NULL);
+		ZEPHIR_RETURN_CALL_FUNCTION("strrev", &_5, _4);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
@@ -1017,7 +1017,7 @@ PHP_METHOD(PocketMine_Utils_Binary, readLDouble) {
 PHP_METHOD(PocketMine_Utils_Binary, writeLDouble) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_4 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_4 = NULL, *_5 = NULL;
 	zval *value_param = NULL, *_0, _1 = zval_used_for_init, _2 = zval_used_for_init, *_3 = NULL;
 	double value;
 
@@ -1036,7 +1036,7 @@ PHP_METHOD(PocketMine_Utils_Binary, writeLDouble) {
 		ZVAL_DOUBLE(&_2, value);
 		ZEPHIR_CALL_FUNCTION(&_3, "pack", &_4, &_1, &_2);
 		zephir_check_call_status();
-		ZEPHIR_RETURN_CALL_METHOD(_3, "rev", NULL);
+		ZEPHIR_RETURN_CALL_FUNCTION("strrev", &_5, _3);
 		zephir_check_call_status();
 		RETURN_MM();
 	} else {
@@ -1247,6 +1247,7 @@ PHP_METHOD(PocketMine_Utils_Binary, readLLong) {
 
 PHP_METHOD(PocketMine_Utils_Binary, writeLLong) {
 
+	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *value_param = NULL, *_0 = NULL;
 	zval *value = NULL;
@@ -1259,7 +1260,7 @@ PHP_METHOD(PocketMine_Utils_Binary, writeLLong) {
 
 	ZEPHIR_CALL_SELF(&_0, "writelong", NULL, value);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(_0, "rev", NULL);
+	ZEPHIR_RETURN_CALL_FUNCTION("strrev", &_1, _0);
 	zephir_check_call_status();
 	RETURN_MM();
 
