@@ -81,7 +81,7 @@ class Vector3{
 		return new Vector3(this->x + x, this->y + y, this->z + z);
 	}
 	
-	public function subtract(var x, var y = 0) -> <Vector3>{
+	public function subtract(var x, var y = 0, var z = 0) -> <Vector3>{
 		if(x instanceof Vector3){
 			return <Vector3> this->add(-x->x, -x->y, -x->z);
 		}
@@ -112,7 +112,7 @@ class Vector3{
 		return new Vector3(this->x / number, this->y / number, this->z / number);
 	}
 
-	public function getSide(int side, int step = 1) -> <Vector3>{
+	public function getSide(const int side, const int step = 1) -> <Vector3>{
 		switch side{
 			case 0:
 				return new Vector3(this->x, this->y - step, this->z);
