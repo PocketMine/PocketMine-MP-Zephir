@@ -28,19 +28,19 @@ abstract class Generator{
 	protected frequency;
 	protected amplitude;
 	
-	public static function floor(double x) -> long{
+	public static function floor(const double x) -> long{
 		return x >= 0 ? (long) x : (long) x - 1;
 	}
 	
-	public static function fade(double x) -> double{
+	public static function fade(const double x) -> double{
 		return x * x * x * (x * (x * 6 - 15) + 10);
 	}
 	
-	public static function lerp(double x, double y, double z) -> double{
+	public static function lerp(const double x, const double y, const double z) -> double{
 		return y + x * (z - y);
 	}
 	
-	public static function grad(int hash, double x, double y, double z) -> double{
+	public static function grad(int hash, const double x, const double y, const double z) -> double{
 		double u;
 		double v;
 		let hash = hash & 15;
@@ -58,7 +58,7 @@ abstract class Generator{
 	
 	}
 	
-	public function noise2D(double x, double z, boolean normalized = false) -> double{
+	public function noise2D(const double x, const double z, const boolean normalized = false) -> double{
 		double result = 0;
 		double amp = 1;
 		double freq = 1;
@@ -80,7 +80,7 @@ abstract class Generator{
 		return result;
 	}
 	
-	public function noise3D(double x, double y, double z, boolean normalized = false) -> double{
+	public function noise3D(const double x, const double y, const double z, const boolean normalized = false) -> double{
 		double result = 0;
 		double amp = 1;
 		double freq = 1;
@@ -102,7 +102,7 @@ abstract class Generator{
 		return result;
 	}
 
-	public function setOffset(double x, double y, double z) -> void{
+	public function setOffset(const double x, const double y, const double z) -> void{
 		let this->offsetX = x;
 		let this->offsetY = y;
 		let this->offsetZ = z;
