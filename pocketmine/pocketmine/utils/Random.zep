@@ -49,7 +49,7 @@ class Random{
 	 * @return int
 	 */
 	public function nextInt() -> long{
-		return (long) this->getSignedInt() & 0x7fffffff;
+		return (long) this->nextSignedInt() & 0x7fffffff;
 	}
 
 	/**
