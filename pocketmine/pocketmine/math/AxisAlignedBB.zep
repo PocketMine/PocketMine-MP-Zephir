@@ -233,7 +233,7 @@ class AxisAlignedBB{
 	}
 
 	public function getAverageEdgeLength() -> double{
-		return (this->maxX - this->minX + this->maxY - this->minY + this->maxZ - this->minZ) / 3;
+		return (double) (this->maxX - this->minX + this->maxY - this->minY + this->maxZ - this->minZ) / (double) 3;
 	}
 
 	public function isVectorInYZ(<Vector3> vector) -> boolean{
