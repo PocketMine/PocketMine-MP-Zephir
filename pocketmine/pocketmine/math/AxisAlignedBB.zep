@@ -48,8 +48,7 @@ class AxisAlignedBB{
 	}
 
 	public function addCoord(double x, double y, double z) -> <AxisAlignedBB>{
-		<AxisAlignedBB> vec;
-		let var vec;
+		var vec;
 		let vec = <AxisAlignedBB> clone this;
 	
 		if(x < 0){
