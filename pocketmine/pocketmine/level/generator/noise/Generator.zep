@@ -32,9 +32,13 @@ abstract class Generator{
 		return ((hash & 1) == 0 ? u : -u) + ((hash & 2) == 0 ? v : -v);
 	}
 	
-	abstract public function getNoise2D(double x, double z){}
+	abstract public function getNoise2D(double x, double z) -> double{
 	
-	abstract public function getNoise3D(double x, double y, double z){}
+	}
+	
+	abstract public function getNoise3D(double x, double y, double z) -> double{
+	
+	}
 	
 	public function noise2D(double x, double z, boolean normalized = false) -> double{
 		double result = 0;
