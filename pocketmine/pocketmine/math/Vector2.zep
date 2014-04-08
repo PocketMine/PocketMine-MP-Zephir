@@ -93,11 +93,11 @@ class Vector2{
 		if(x instanceof Vector2){
 			return (double) this->distanceSquared(x->x, x->y);
 		}
-		return (double) (pow(this->x - x, 2) + pow(this->y - y, 2));
+		return (double) (pow((double) this->x - (double) x, 2) + pow((double) this->y - (double) y, 2));
 	}
 	
 	public function length() -> double{
-		return (double) sqrt(this->lengthSquared());
+		return (double) sqrt((double) this->lengthSquared());
 	}
 	
 	public function lengthSquared() -> double{

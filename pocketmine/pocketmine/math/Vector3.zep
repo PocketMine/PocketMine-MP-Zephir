@@ -136,7 +136,7 @@ class Vector3{
 	}
 	
 	public function distanceSquared(<Vector3> pos) -> double{
-		return (double) (pow(this->x - pos->x, 2) + pow(this->y - pos->y, 2) + pow(this->z - pos->z, 2));
+		return (double) (pow((double) this->x - (double) pos->x, 2) + pow((double) this->y - (double) pos->y, 2) + pow((double) this->z - (double) pos->z, 2));
 	}
 	
 	public function maxPlainDistance(var x, var z) -> double{
@@ -147,11 +147,11 @@ class Vector3{
 				return (double) this->maxPlainDistance(x->x, x->y);
 			}
 		}
-		return (double) max(abs(this->x - x), abs(this->z - z));
+		return (double) max(abs((double) this->x - (double) x), abs((double) this->z - (double) z));
 	}
 	
 	public function length() -> double{
-		return (double) sqrt(this->lengthSquared());
+		return (double) sqrt((double) this->lengthSquared());
 	}
 	
 	public function lengthSquared() -> double{
