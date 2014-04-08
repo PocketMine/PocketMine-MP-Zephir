@@ -350,9 +350,9 @@ PHP_METHOD(PocketMine_Math_Vector2, distance) {
 
 PHP_METHOD(PocketMine_Math_Vector2, distanceSquared) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_6 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_5 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *x, *y = NULL, *_0 = NULL, *_1, *_2, *_3, _4, _5 = zval_used_for_init, _7, *_8 = NULL, *_9;
+	zval *x, *y = NULL, *_0 = NULL, *_1 = NULL, *_2 = NULL, _3 = zval_used_for_init, _4 = zval_used_for_init, *_6 = NULL, *_7;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 1, &x, &y);
@@ -372,39 +372,43 @@ PHP_METHOD(PocketMine_Math_Vector2, distanceSquared) {
 		zephir_check_call_status();
 		RETURN_MM_DOUBLE(zephir_get_doubleval(_0));
 	}
-	_3 = zephir_fetch_nproperty_this(this_ptr, SL("x"), PH_NOISY_CC);
+	ZEPHIR_OBS_NVAR(_1);
+	zephir_read_property_this(&_1, this_ptr, SL("x"), PH_NOISY_CC);
+	ZEPHIR_SINIT_VAR(_3);
+	ZVAL_DOUBLE(&_3, (zephir_get_doubleval(_1) - zephir_get_doubleval(x)));
 	ZEPHIR_SINIT_VAR(_4);
-	sub_function(&_4, _3, x TSRMLS_CC);
-	ZEPHIR_SINIT_VAR(_5);
-	ZVAL_LONG(&_5, 2);
-	ZEPHIR_CALL_FUNCTION(&_0, "pow", &_6, _4, &_5);
+	ZVAL_LONG(&_4, 2);
+	ZEPHIR_CALL_FUNCTION(&_0, "pow", &_5, &_3, &_4);
 	zephir_check_call_status();
-	_3 = zephir_fetch_nproperty_this(this_ptr, SL("y"), PH_NOISY_CC);
-	ZEPHIR_SINIT_NVAR(_5);
-	sub_function(&_5, _3, y TSRMLS_CC);
-	ZEPHIR_SINIT_VAR(_7);
-	ZVAL_LONG(&_7, 2);
-	ZEPHIR_CALL_FUNCTION(&_8, "pow", &_6, _5, &_7);
+	ZEPHIR_OBS_NVAR(_2);
+	zephir_read_property_this(&_2, this_ptr, SL("y"), PH_NOISY_CC);
+	ZEPHIR_SINIT_NVAR(_3);
+	ZVAL_DOUBLE(&_3, (zephir_get_doubleval(_2) - zephir_get_doubleval(y)));
+	ZEPHIR_SINIT_NVAR(_4);
+	ZVAL_LONG(&_4, 2);
+	ZEPHIR_CALL_FUNCTION(&_6, "pow", &_5, &_3, &_4);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(_9);
-	zephir_add_function(_9, _0, _8 TSRMLS_CC);
-	RETURN_MM_DOUBLE(zephir_get_doubleval(_9));
+	ZEPHIR_INIT_VAR(_7);
+	zephir_add_function(_7, _0, _6 TSRMLS_CC);
+	RETURN_MM_DOUBLE(zephir_get_doubleval(_7));
 
 }
 
 PHP_METHOD(PocketMine_Math_Vector2, length) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *_0 = NULL, *_1 = NULL;
+	zval *_0 = NULL, _1, *_2 = NULL;
 
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "lengthsquared",  NULL);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_1, "sqrt", &_2, _0);
+	ZEPHIR_SINIT_VAR(_1);
+	ZVAL_DOUBLE(&_1, zephir_get_doubleval(_0));
+	ZEPHIR_CALL_FUNCTION(&_2, "sqrt", &_3, &_1);
 	zephir_check_call_status();
-	RETURN_MM_DOUBLE(zephir_get_doubleval(_1));
+	RETURN_MM_DOUBLE(zephir_get_doubleval(_2));
 
 }
 
