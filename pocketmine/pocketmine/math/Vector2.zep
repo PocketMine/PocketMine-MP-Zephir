@@ -106,7 +106,7 @@ class Vector2{
 	
 	public function normalize() -> <Vector2>{
 		double len;
-		let len = this->length();
+		let len = (double) this->length();
 		if(len != 0){
 			return <Vector2> this->divide(len);
 		}

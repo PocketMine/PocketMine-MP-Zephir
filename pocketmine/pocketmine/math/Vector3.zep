@@ -160,7 +160,7 @@ class Vector3{
 	
 	public function normalize() -> <Vector3>{
 		double len;
-		let len = this->length();
+		let len = (double) this->length();
 		if(len != 0){
 			return <Vector3> this->divide(len);
 		}
