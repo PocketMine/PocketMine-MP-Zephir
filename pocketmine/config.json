@@ -13,7 +13,7 @@
       "static-type-inference-second-pass" : true
     },
   "stubs" : { "path" : "ide/%version%/%namespace%/",
-      "stubs-run-after-generate" : true
+      "stubs-run-after-generate" : false
     },
   "verbose" : false,
   "warnings" : { "conditional-initialization" : true,
@@ -31,7 +31,7 @@
       "non-valid-isset" : true,
       "non-valid-new" : true,
       "non-valid-objectupdate" : true,
-      "nonexistant-constant" : true,
+      "nonexistant-constant" : false,
       "nonexistent-class" : true,
       "nonexistent-function" : true,
       "not-supported-magic-constant" : true,
