@@ -47,17 +47,15 @@ class Vector2{
 	public function add(var x, var y = 0) -> <Vector2>{
 		if(x instanceof Vector2){
 			return <Vector2> this->add(x->x, x->y);
-		}else{
-			return new Vector2(this->x + x, this->y + y);
 		}
+		return new Vector2(this->x + x, this->y + y);
 	}
 	
 	public function subtract(var x, var y = 0) -> <Vector2>{
 		if(x instanceof Vector2){
 			return <Vector2> this->add(-x->x, -x->y);
-		}else{
-			return <Vector2> this->add(-x, -y);
 		}
+		return <Vector2> this->add(-x, -y);
 	}
 	
 	public function ceil() -> <Vector2>{
@@ -87,17 +85,15 @@ class Vector2{
 	public function distance(var x, var y = 0) -> double{
 		if(x instanceof Vector2){
 			return (double) sqrt(this->distanceSquared(x->x, x->y));
-		}else{
-			return (double) sqrt(this->distanceSquared(x, y));
 		}
+		return (double) sqrt(this->distanceSquared(x, y));
 	}
 	
 	public function distanceSquared(var x, var y = 0) -> double{
 		if(x instanceof Vector2){
 			return (double) this->distanceSquared(x->x, x->y);
-		}else{
-			return (double) (pow(this->x - x, 2) + pow(this->y - y, 2));
 		}
+		return (double) (pow(this->x - x, 2) + pow(this->y - y, 2));
 	}
 	
 	public function length() -> double{

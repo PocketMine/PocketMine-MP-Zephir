@@ -77,17 +77,15 @@ class Vector3{
 	public function add(var x, var y = 0, var z = 0) -> <Vector3>{
 		if(x instanceof Vector3){
 			return <Vector3> this->add(x->x, x->y, x->z);
-		}else{
-			return new Vector3(this->x + x, this->y + y, this->z + z);
 		}
+		return new Vector3(this->x + x, this->y + y, this->z + z);
 	}
 	
 	public function subtract(var x, var y = 0) -> <Vector3>{
 		if(x instanceof Vector3){
 			return <Vector3> this->add(-x->x, -x->y, -x->z);
-		}else{
-			return <Vector3> this->add(-x, -y, -z);
 		}
+		return <Vector3> this->add(-x, -y, -z);
 	}
 	
 	public function ceil() -> <Vector3>{
@@ -147,10 +145,9 @@ class Vector3{
 		}else{
 			if(x instanceof Vector2){
 				return (double) this->maxPlainDistance(x->x, x->y);
-			}else{
-				return (double) max(abs(this->x - x), abs(this->z - z));
 			}
 		}
+		return (double) max(abs(this->x - x), abs(this->z - z));
 	}
 	
 	public function length() -> double{
