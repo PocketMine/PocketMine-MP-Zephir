@@ -52,7 +52,7 @@ abstract class Generator{
 			let max += amp;
 			let freq *= this->frequency;
 			let amp *= this->amplitude;
-			let i--;
+			let i++;
 		}
 		
 		if(normalized === true){
@@ -74,7 +74,7 @@ abstract class Generator{
 			let max += amp;
 			let freq *= this->frequency;
 			let amp *= this->amplitude;
-			let i--;
+			let i++;
 		}
 		
 		if(normalized === true){

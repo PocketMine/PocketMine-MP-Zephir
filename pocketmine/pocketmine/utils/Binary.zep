@@ -228,7 +228,7 @@ class Binary{
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("f", value);
 		}else{
-			return pack("f", value)->rev();
+			return strrev(pack("f", value));
 		}
 	}
 	
@@ -242,7 +242,7 @@ class Binary{
 	
 	public static function writeLFloat(float value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
-			return pack("f", value)->rev();
+			return strrev(pack("f", value));
 		}else{
 			return pack("f", value);
 		}
@@ -264,7 +264,7 @@ class Binary{
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("d", value);
 		}else{
-			return pack("d", value)->rev();
+			return strrev(pack("d", value));
 		}
 	}
 	
@@ -278,7 +278,7 @@ class Binary{
 	
 	public static function writeLDouble(double value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
-			return pack("d", value)->rev();
+			return strrev(pack("d", value));
 		}else{
 			return pack("d", value);
 		}
@@ -330,7 +330,7 @@ class Binary{
 	}
 	
 	public static function writeLLong(string value){
-		return self::writeLong(value)->rev();
+		return strrev(self::writeLong(value));
 	}
 }
 
