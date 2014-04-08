@@ -65,7 +65,7 @@ class Random{
 		if(t > 2147483647){
 			let t -= 4294967296;
 		}
-		return (long) t;
+		return t;
 	}
 
 	/**
