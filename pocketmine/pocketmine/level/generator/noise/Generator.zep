@@ -48,7 +48,7 @@ abstract class Generator{
 		int i = 0;
 		
 		while(i < this->octaves){
-			let result += this->getNoise2D(x * freq, z * freq) * amp;
+			let result += (double) this->getNoise2D(x * freq, z * freq) * amp;
 			let max += amp;
 			let freq *= this->frequency;
 			let amp *= this->amplitude;
@@ -70,7 +70,7 @@ abstract class Generator{
 		int i = 0;
 		
 		while(i < this->octaves){
-			let result += this->getNoise3D(x * freq, y * freq, z * freq) * amp;
+			let result += (double) this->getNoise3D(x * freq, y * freq, z * freq) * amp;
 			let max += amp;
 			let freq *= this->frequency;
 			let amp *= this->amplitude;
