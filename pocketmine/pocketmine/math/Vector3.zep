@@ -144,10 +144,12 @@ class Vector3{
 	public function maxPlainDistance(var x, var z) -> double{
 		if(x instanceof Vector3){
 			return (double) this->maxPlainDistance(x->x, x->z);
-		}elseif(x instanceof Vector2){
-			return (double) this->maxPlainDistance(x->x, x->y);
 		}else{
-			return (double) max(abs(this->x - x), abs(this->z - z));
+			if(x instanceof Vector2){
+				return (double) this->maxPlainDistance(x->x, x->y);
+			}else{
+				return (double) max(abs(this->x - x), abs(this->z - z));
+			}
 		}
 	}
 	
