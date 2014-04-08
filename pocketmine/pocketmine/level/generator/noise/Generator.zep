@@ -56,7 +56,7 @@ abstract class Generator{
 		}
 		
 		if(normalized === true){
-			let result /= max;
+			let result = result / max;
 		}
 		
 		return result;
@@ -78,7 +78,7 @@ abstract class Generator{
 		}
 		
 		if(normalized === true){
-			let result /= max;
+			let result = result / max;
 		}
 		
 		return result;
