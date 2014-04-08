@@ -300,7 +300,7 @@ class Binary{
 		
 		while i < 8 {
 			let value = bcmul(value, "65536", 0);
-			let value = bcadd(value, Utils::readShort(substr(x, i, 2), false), 0);
+			let value = bcadd(value, Binary::readShort(substr(x, i, 2), false), 0);
 			let i += 2;
 		}
 		
