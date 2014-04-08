@@ -381,9 +381,9 @@ PHP_METHOD(PocketMine_Utils_Binary, readMetadata) {
 			ZEPHIR_INIT_NVAR(_19);
 			ZVAL_LONG(_19, type);
 			zephir_array_fast_append(_18, _19);
-			zephir_array_update_long(&m, bottom, &_18, PH_COPY | PH_SEPARATE, "pocketmine/utils/Binary.zep", 113);
+			zephir_array_update_long(&m, bottom, &_18, PH_COPY | PH_SEPARATE, "pocketmine/utils/Binary.zep", 112);
 		} else {
-			zephir_array_update_long(&m, bottom, &r, PH_COPY | PH_SEPARATE, "pocketmine/utils/Binary.zep", 115);
+			zephir_array_update_long(&m, bottom, &r, PH_COPY | PH_SEPARATE, "pocketmine/utils/Binary.zep", 114);
 		}
 		_4 = ZEPHIR_STRING_OFFSET(value, offset);
 		b = _4;
