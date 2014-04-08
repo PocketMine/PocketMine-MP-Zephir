@@ -49,7 +49,7 @@ class AxisAlignedBB{
 
 	public function addCoord(const double x, const double y, const double z) -> <AxisAlignedBB>{
 		var vec;
-		let vec = <AxisAlignedBB> clone this;
+		let vec = new AxisAlignedBB(this->minX, this->minY, this->minZ, this->maxX, this->maxY, this->maxZ);
 	
 		if(x < 0){
 			let vec->minX += x;
@@ -80,7 +80,7 @@ class AxisAlignedBB{
 
 	public function expand(const double x, const double y, const double z) -> <AxisAlignedBB>{
 		var vec;
-		let vec = <AxisAlignedBB> clone this;
+		let vec = new AxisAlignedBB(this->minX, this->minY, this->minZ, this->maxX, this->maxY, this->maxZ);
 		let vec->minX -= x;
 		let vec->minY -= y;
 		let vec->minZ -= z;
@@ -93,7 +93,7 @@ class AxisAlignedBB{
 
 	public function offset(const double x, const double y, const double z) -> <AxisAlignedBB>{
 		var vec;
-		let vec = <AxisAlignedBB> clone this;
+		let vec = new AxisAlignedBB(this->minX, this->minY, this->minZ, this->maxX, this->maxY, this->maxZ);
 		let vec->minX += x;
 		let vec->minY += y;
 		let vec->minZ += z;
@@ -106,7 +106,7 @@ class AxisAlignedBB{
 
 	public function contract(const double x, const double y, const double z) -> <AxisAlignedBB>{
 		var vec;
-		let vec = <AxisAlignedBB> clone this;
+		let vec = new AxisAlignedBB(this->minX, this->minY, this->minZ, this->maxX, this->maxY, this->maxZ);
 		let vec->minX += x;
 		let vec->minY += y;
 		let vec->minZ += z;
