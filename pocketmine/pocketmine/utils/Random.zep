@@ -59,7 +59,7 @@ class Random{
 	 */
 	public function nextSignedInt() -> long{
 		long t;
-		let t = crc32(Binary::writeInt(this->seed));
+		let t = (long) crc32(Binary::writeInt(this->seed));
 		let this->seed = this->seed ^ t;
 
 		if(t > 2147483647){
