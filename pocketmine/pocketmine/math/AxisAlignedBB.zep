@@ -239,7 +239,7 @@ class AxisAlignedBB{
 	public function isVectorInYZ(<Vector3> vector) -> boolean{
 		return vector->y >= this->minY && vector->y <= this->maxY && vector->z >= this->minZ && vector->z <= this->maxZ;
 	}
-s
+
 	public function isVectorInXZ(<Vector3> vector) -> boolean{
 		return vector->x >= this->minX && vector->x <= this->maxX && vector->z >= this->minZ && vector->z <= this->maxZ;
 	}
