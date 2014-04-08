@@ -129,7 +129,7 @@ class AxisAlignedBB{
 	}
 
 	public function getOffsetBoundingBox(const double x, const double y, const double z) -> <AxisAlignedBB>{
-		return new AxisAlignedBB(this->minX + x, this->minY + y, this->minZ + z, this->maxX + x, this->maxY + y, this->maxZ + z);
+		return new AxisAlignedBB((double) this->minX + x, (double) this->minY + y, (double) this->minZ + z, (double) this->maxX + x, (double) this->maxY + y, (double) this->maxZ + z);
 	}
 
 	public function calculateXOffset(<AxisAlignedBB> bb, double x) -> double{
@@ -143,13 +143,13 @@ class AxisAlignedBB{
 			return x;
 		}
 		if(x > 0 && bb->maxX <= this->minX){
-			let x1 = this->minX - bb->maxX;
+			let x1 = (double) (this->minX - bb->maxX);
 			if(x1 < x){
 				let x = x1;
 			}
 		}
 		if(x < 0 && bb->minX >= this->maxX){
-			let x2 = this->maxX - bb->minX;
+			let x2 = (double) (this->maxX - bb->minX);
 			if(x2 > x){
 				let x = x2;
 			}
@@ -169,13 +169,13 @@ class AxisAlignedBB{
 			return y;
 		}
 		if(y > 0 && bb->maxY <= this->minY){
-			let y1 = this->minY - bb->maxY;
+			let y1 = (double) (this->minY - bb->maxY);
 			if(y1 < y){
 				let y = y1;
 			}
 		}
 		if(y < 0 && bb->minY >= this->maxY){
-			let y2 = this->maxY - bb->minY;
+			let y2 = (double) (this->maxY - bb->minY);
 			if(y2 > y){
 				let y = y2;
 			}
@@ -195,13 +195,13 @@ class AxisAlignedBB{
 			return z;
 		}
 		if(z > 0 && bb->maxZ <= this->minZ){
-			let z1 = this->minZ - bb->maxZ;
+			let z1 = (double) (this->minZ - bb->maxZ);
 			if(z1 < z){
 				let z = z1;
 			}
 		}
 		if(z < 0 && bb->minZ >= this->maxZ){
-			let z2 = this->maxZ - bb->minZ;
+			let z2 = (double) (this->maxZ - bb->minZ);
 			if(z2 > z){
 				let z = z2;
 			}
