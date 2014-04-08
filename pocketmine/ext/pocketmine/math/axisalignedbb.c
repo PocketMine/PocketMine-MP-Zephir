@@ -15,8 +15,8 @@
 #include "kernel/object.h"
 #include "kernel/memory.h"
 #include "kernel/operators.h"
-#include "kernel/exception.h"
 #include "kernel/fcall.h"
+#include "kernel/exception.h"
 
 
 /*
@@ -132,7 +132,8 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, setBounds) {
 
 PHP_METHOD(PocketMine_Math_AxisAlignedBB, addCoord) {
 
-	zval *x_param = NULL, *y_param = NULL, *z_param = NULL, *vec = NULL, _0, *_1;
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *x_param = NULL, *y_param = NULL, *z_param = NULL, *vec, *_0, *_1, *_2, *_3, *_4, *_5, *_6;
 	double x, y, z;
 
 	ZEPHIR_MM_GROW();
@@ -143,42 +144,47 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, addCoord) {
 	z = zephir_get_doubleval(z_param);
 
 
-	ZEPHIR_SINIT_VAR(_0);
-	if (zephir_clone(_0, this_ptr TSRMLS_CC) == FAILURE) {
-		RETURN_MM();
-	}
-	ZEPHIR_CPY_WRT(vec, _0);
+	ZEPHIR_INIT_VAR(vec);
+	object_init_ex(vec, pocketmine_math_axisalignedbb_ce);
+	_0 = zephir_fetch_nproperty_this(this_ptr, SL("minX"), PH_NOISY_CC);
+	_1 = zephir_fetch_nproperty_this(this_ptr, SL("minY"), PH_NOISY_CC);
+	_2 = zephir_fetch_nproperty_this(this_ptr, SL("minZ"), PH_NOISY_CC);
+	_3 = zephir_fetch_nproperty_this(this_ptr, SL("maxX"), PH_NOISY_CC);
+	_4 = zephir_fetch_nproperty_this(this_ptr, SL("maxY"), PH_NOISY_CC);
+	_5 = zephir_fetch_nproperty_this(this_ptr, SL("maxZ"), PH_NOISY_CC);
+	ZEPHIR_CALL_METHOD(NULL, vec, "__construct", NULL, _0, _1, _2, _3, _4, _5);
+	zephir_check_call_status();
 	if (x < 0) {
-		ZEPHIR_INIT_ZVAL_NREF(_1);
-		ZVAL_DOUBLE(_1, x);
-		zephir_update_property_zval(vec, SL("minX"), _1 TSRMLS_CC);
+		ZEPHIR_INIT_ZVAL_NREF(_6);
+		ZVAL_DOUBLE(_6, x);
+		zephir_update_property_zval(vec, SL("minX"), _6 TSRMLS_CC);
 	} else {
 		if (x > 0) {
-			ZEPHIR_INIT_ZVAL_NREF(_1);
-			ZVAL_DOUBLE(_1, x);
-			zephir_update_property_zval(vec, SL("maxX"), _1 TSRMLS_CC);
+			ZEPHIR_INIT_ZVAL_NREF(_6);
+			ZVAL_DOUBLE(_6, x);
+			zephir_update_property_zval(vec, SL("maxX"), _6 TSRMLS_CC);
 		}
 	}
 	if (y < 0) {
-		ZEPHIR_INIT_ZVAL_NREF(_1);
-		ZVAL_DOUBLE(_1, y);
-		zephir_update_property_zval(vec, SL("minY"), _1 TSRMLS_CC);
+		ZEPHIR_INIT_ZVAL_NREF(_6);
+		ZVAL_DOUBLE(_6, y);
+		zephir_update_property_zval(vec, SL("minY"), _6 TSRMLS_CC);
 	} else {
 		if (y > 0) {
-			ZEPHIR_INIT_ZVAL_NREF(_1);
-			ZVAL_DOUBLE(_1, y);
-			zephir_update_property_zval(vec, SL("maxY"), _1 TSRMLS_CC);
+			ZEPHIR_INIT_ZVAL_NREF(_6);
+			ZVAL_DOUBLE(_6, y);
+			zephir_update_property_zval(vec, SL("maxY"), _6 TSRMLS_CC);
 		}
 	}
 	if (z < 0) {
-		ZEPHIR_INIT_ZVAL_NREF(_1);
-		ZVAL_DOUBLE(_1, z);
-		zephir_update_property_zval(vec, SL("minZ"), _1 TSRMLS_CC);
+		ZEPHIR_INIT_ZVAL_NREF(_6);
+		ZVAL_DOUBLE(_6, z);
+		zephir_update_property_zval(vec, SL("minZ"), _6 TSRMLS_CC);
 	} else {
 		if (z > 0) {
-			ZEPHIR_INIT_ZVAL_NREF(_1);
-			ZVAL_DOUBLE(_1, z);
-			zephir_update_property_zval(vec, SL("maxZ"), _1 TSRMLS_CC);
+			ZEPHIR_INIT_ZVAL_NREF(_6);
+			ZVAL_DOUBLE(_6, z);
+			zephir_update_property_zval(vec, SL("maxZ"), _6 TSRMLS_CC);
 		}
 	}
 	RETURN_CCTOR(vec);
@@ -187,7 +193,8 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, addCoord) {
 
 PHP_METHOD(PocketMine_Math_AxisAlignedBB, expand) {
 
-	zval *x_param = NULL, *y_param = NULL, *z_param = NULL, *vec = NULL, _0, *_1;
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *x_param = NULL, *y_param = NULL, *z_param = NULL, *vec, *_0, *_1, *_2, *_3, *_4, *_5, *_6;
 	double x, y, z;
 
 	ZEPHIR_MM_GROW();
@@ -198,36 +205,42 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, expand) {
 	z = zephir_get_doubleval(z_param);
 
 
-	ZEPHIR_SINIT_VAR(_0);
-	if (zephir_clone(_0, this_ptr TSRMLS_CC) == FAILURE) {
-		RETURN_MM();
-	}
-	ZEPHIR_CPY_WRT(vec, _0);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, x);
-	zephir_update_property_zval(vec, SL("minX"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, y);
-	zephir_update_property_zval(vec, SL("minY"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, z);
-	zephir_update_property_zval(vec, SL("minZ"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, x);
-	zephir_update_property_zval(vec, SL("maxX"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, y);
-	zephir_update_property_zval(vec, SL("maxY"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, z);
-	zephir_update_property_zval(vec, SL("maxZ"), _1 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(vec);
+	object_init_ex(vec, pocketmine_math_axisalignedbb_ce);
+	_0 = zephir_fetch_nproperty_this(this_ptr, SL("minX"), PH_NOISY_CC);
+	_1 = zephir_fetch_nproperty_this(this_ptr, SL("minY"), PH_NOISY_CC);
+	_2 = zephir_fetch_nproperty_this(this_ptr, SL("minZ"), PH_NOISY_CC);
+	_3 = zephir_fetch_nproperty_this(this_ptr, SL("maxX"), PH_NOISY_CC);
+	_4 = zephir_fetch_nproperty_this(this_ptr, SL("maxY"), PH_NOISY_CC);
+	_5 = zephir_fetch_nproperty_this(this_ptr, SL("maxZ"), PH_NOISY_CC);
+	ZEPHIR_CALL_METHOD(NULL, vec, "__construct", NULL, _0, _1, _2, _3, _4, _5);
+	zephir_check_call_status();
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, x);
+	zephir_update_property_zval(vec, SL("minX"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, y);
+	zephir_update_property_zval(vec, SL("minY"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, z);
+	zephir_update_property_zval(vec, SL("minZ"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, x);
+	zephir_update_property_zval(vec, SL("maxX"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, y);
+	zephir_update_property_zval(vec, SL("maxY"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, z);
+	zephir_update_property_zval(vec, SL("maxZ"), _6 TSRMLS_CC);
 	RETURN_CCTOR(vec);
 
 }
 
 PHP_METHOD(PocketMine_Math_AxisAlignedBB, offset) {
 
-	zval *x_param = NULL, *y_param = NULL, *z_param = NULL, *vec = NULL, _0, *_1;
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *x_param = NULL, *y_param = NULL, *z_param = NULL, *vec, *_0, *_1, *_2, *_3, *_4, *_5, *_6;
 	double x, y, z;
 
 	ZEPHIR_MM_GROW();
@@ -238,36 +251,42 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, offset) {
 	z = zephir_get_doubleval(z_param);
 
 
-	ZEPHIR_SINIT_VAR(_0);
-	if (zephir_clone(_0, this_ptr TSRMLS_CC) == FAILURE) {
-		RETURN_MM();
-	}
-	ZEPHIR_CPY_WRT(vec, _0);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, x);
-	zephir_update_property_zval(vec, SL("minX"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, y);
-	zephir_update_property_zval(vec, SL("minY"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, z);
-	zephir_update_property_zval(vec, SL("minZ"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, x);
-	zephir_update_property_zval(vec, SL("maxX"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, y);
-	zephir_update_property_zval(vec, SL("maxY"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, z);
-	zephir_update_property_zval(vec, SL("maxZ"), _1 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(vec);
+	object_init_ex(vec, pocketmine_math_axisalignedbb_ce);
+	_0 = zephir_fetch_nproperty_this(this_ptr, SL("minX"), PH_NOISY_CC);
+	_1 = zephir_fetch_nproperty_this(this_ptr, SL("minY"), PH_NOISY_CC);
+	_2 = zephir_fetch_nproperty_this(this_ptr, SL("minZ"), PH_NOISY_CC);
+	_3 = zephir_fetch_nproperty_this(this_ptr, SL("maxX"), PH_NOISY_CC);
+	_4 = zephir_fetch_nproperty_this(this_ptr, SL("maxY"), PH_NOISY_CC);
+	_5 = zephir_fetch_nproperty_this(this_ptr, SL("maxZ"), PH_NOISY_CC);
+	ZEPHIR_CALL_METHOD(NULL, vec, "__construct", NULL, _0, _1, _2, _3, _4, _5);
+	zephir_check_call_status();
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, x);
+	zephir_update_property_zval(vec, SL("minX"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, y);
+	zephir_update_property_zval(vec, SL("minY"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, z);
+	zephir_update_property_zval(vec, SL("minZ"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, x);
+	zephir_update_property_zval(vec, SL("maxX"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, y);
+	zephir_update_property_zval(vec, SL("maxY"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, z);
+	zephir_update_property_zval(vec, SL("maxZ"), _6 TSRMLS_CC);
 	RETURN_CCTOR(vec);
 
 }
 
 PHP_METHOD(PocketMine_Math_AxisAlignedBB, contract) {
 
-	zval *x_param = NULL, *y_param = NULL, *z_param = NULL, *vec = NULL, _0, *_1;
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *x_param = NULL, *y_param = NULL, *z_param = NULL, *vec, *_0, *_1, *_2, *_3, *_4, *_5, *_6;
 	double x, y, z;
 
 	ZEPHIR_MM_GROW();
@@ -278,29 +297,34 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, contract) {
 	z = zephir_get_doubleval(z_param);
 
 
-	ZEPHIR_SINIT_VAR(_0);
-	if (zephir_clone(_0, this_ptr TSRMLS_CC) == FAILURE) {
-		RETURN_MM();
-	}
-	ZEPHIR_CPY_WRT(vec, _0);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, x);
-	zephir_update_property_zval(vec, SL("minX"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, y);
-	zephir_update_property_zval(vec, SL("minY"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, z);
-	zephir_update_property_zval(vec, SL("minZ"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, x);
-	zephir_update_property_zval(vec, SL("maxX"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, y);
-	zephir_update_property_zval(vec, SL("maxY"), _1 TSRMLS_CC);
-	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_DOUBLE(_1, z);
-	zephir_update_property_zval(vec, SL("maxZ"), _1 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(vec);
+	object_init_ex(vec, pocketmine_math_axisalignedbb_ce);
+	_0 = zephir_fetch_nproperty_this(this_ptr, SL("minX"), PH_NOISY_CC);
+	_1 = zephir_fetch_nproperty_this(this_ptr, SL("minY"), PH_NOISY_CC);
+	_2 = zephir_fetch_nproperty_this(this_ptr, SL("minZ"), PH_NOISY_CC);
+	_3 = zephir_fetch_nproperty_this(this_ptr, SL("maxX"), PH_NOISY_CC);
+	_4 = zephir_fetch_nproperty_this(this_ptr, SL("maxY"), PH_NOISY_CC);
+	_5 = zephir_fetch_nproperty_this(this_ptr, SL("maxZ"), PH_NOISY_CC);
+	ZEPHIR_CALL_METHOD(NULL, vec, "__construct", NULL, _0, _1, _2, _3, _4, _5);
+	zephir_check_call_status();
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, x);
+	zephir_update_property_zval(vec, SL("minX"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, y);
+	zephir_update_property_zval(vec, SL("minY"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, z);
+	zephir_update_property_zval(vec, SL("minZ"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, x);
+	zephir_update_property_zval(vec, SL("maxX"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, y);
+	zephir_update_property_zval(vec, SL("maxY"), _6 TSRMLS_CC);
+	ZEPHIR_INIT_ZVAL_NREF(_6);
+	ZVAL_DOUBLE(_6, z);
+	zephir_update_property_zval(vec, SL("maxZ"), _6 TSRMLS_CC);
 	RETURN_CCTOR(vec);
 
 }
