@@ -53,20 +53,26 @@ class AxisAlignedBB{
 	
 		if(x < 0){
 			let vec->minX += x;
-		}else if(x > 0){
-			let vec->maxX += x;
+		}else{
+			if(x > 0){
+				let vec->maxX += x;
+			}
 		}
 
 		if(y < 0){
 			let vec->minY += y;
-		}else if(y > 0){
-			let vec->maxY += y;
+		}else{
+			if(y > 0){
+				let vec->maxY += y;
+			}
 		}
 
 		if(z < 0){
 			let vec->minZ += z;
-		}else if(z > 0){
-			let vec->maxZ += z;
+		}else{
+			if(z > 0){
+				let vec->maxZ += z;
+			}
 		}
 
 		return vec;
