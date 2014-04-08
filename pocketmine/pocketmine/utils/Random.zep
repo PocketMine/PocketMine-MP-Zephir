@@ -29,7 +29,7 @@ class Random{
 	/**
 	 * @param int $seed Integer to be used as seed.
 	 */
-	public function __construct(ulong seed = -1){
+	public function __construct(long seed = -1){
 		if(seed == -1){
 			let seed = (long) time();
 		}
@@ -39,7 +39,7 @@ class Random{
 	/**
 	 * @param int $seed Integer to be used as seed.
 	 */
-	public function setSeed(long seed) -> void{
+	public function setSeed(const long seed) -> void{
 		let this->seed = (long) crc32(Binary::writeInt(seed));
 	}
 	
@@ -103,7 +103,7 @@ class Random{
 	 *
 	 * @return int
 	 */
-	public function nextRange(long start = 0, long end = 0x7fffffff) -> long{
+	public function nextRange(const long start = 0, const long end = 0x7fffffff) -> long{
 		return start + ((long) this->nextInt() % (end + 1 - start));
 	}
 

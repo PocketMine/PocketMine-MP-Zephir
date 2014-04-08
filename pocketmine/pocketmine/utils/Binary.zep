@@ -23,15 +23,15 @@ class Binary{
 	const BIG_ENDIAN = 0x00;
 	const LITTLE_ENDIAN = 0x01;
 	
-	public static function readTriad(static string str) -> long{
+	public const function readTriad(const string str) -> long{
 		return (long) unpack("N", "\x00" . str)[1];
 	}
 	
-	public static function writeTriad(static long value) -> string{
+	public const function writeTriad(const long value) -> string{
 		return substr(pack("N", value), 1);
 	}
 	
-	public static function writeMetadata(static array data) -> string{
+	public const function writeMetadata(const array data) -> string{
 		string m = "";
 		
 		var bottom;
@@ -70,7 +70,7 @@ class Binary{
 		return m . "\x7f";
 	}
 	
-	public static function readMetadata(static string value, static boolean types = true) -> array{
+	public const function readMetadata(const string value, const boolean types = true) -> array{
 		long offset = 1;
 		array m = [];
 		uchar b;
@@ -139,11 +139,11 @@ class Binary{
 		return m;
 	}
 	
-	public static function readBool(static string b) -> boolean{
+	public const function readBool(const string b) -> boolean{
 		return b[0] === 0 ? false : true;
 	}
 	
-	public static function writeBool(static boolean b){
+	public const function writeBool(const boolean b){
 		if(b === true){
 			return "\x01";
 		}else{
@@ -151,7 +151,7 @@ class Binary{
 		}
 	}
 	
-	public static function readByte(static string c, static boolean isSigned = true) -> int{
+	public const function readByte(const string c, const boolean isSigned = true) -> int{
 		int b;
 		let b = ord(c[0]) * (int) 1;
 		if(isSigned === true && (b & 0x80) > 0){
@@ -161,7 +161,7 @@ class Binary{
 		return b;
 	}
 	
-	public static function writeByte(int c) -> string{
+	public const function writeByte(int c) -> string{
 		if(c < 0 && c >= -0x80){
 			let c = 0xff + c + 1;
 		}
@@ -169,7 +169,7 @@ class Binary{
 		return chr(c);
 	}
 	
-	public static function readShort(static string str, static boolean isSigned = true) -> int{
+	public const function readShort(const string str, const boolean isSigned = true) -> int{
 		int unpacked;
 		let unpacked = (int) unpack("n", str)[1];
 		
@@ -180,14 +180,14 @@ class Binary{
 		return unpacked;
 	}
 	
-	public static function writeShort(long value) -> string{
+	public const function writeShort(long value) -> string{
 		if(value < 0){
 			let value += 0x10000;
 		}
 		return pack("n", value);
 	}
 	
-	public static function readLShort(static string str, static boolean isSigned = true){
+	public const function readLShort(const string str, const boolean isSigned = true){
 		int unpacked;
 		let unpacked = (int) unpack("v", str)[1];
 		
@@ -198,14 +198,14 @@ class Binary{
 		return unpacked;
 	}
 	
-	public static function writeLShort(long value) -> string{
+	public const function writeLShort(long value) -> string{
 		if(value < 0){
 			let value += 0x10000;
 		}
 		return pack("v", value);
 	}
 
-	public static function readInt(static string str) -> long{
+	public const function readInt(const string str) -> long{
 		long unpacked;
 		let unpacked = (long) unpack("N", str)[1];
 		
@@ -216,11 +216,11 @@ class Binary{
 		return unpacked;
 	}
 	
-	public static function writeInt(static long value) -> string{
+	public const function writeInt(const long value) -> string{
 		return pack("N", value);
 	}
 
-	public static function readLInt(static string str) -> long{
+	public const function readLInt(const string str) -> long{
 		long unpacked;
 		let unpacked = (long) unpack("V", str)[1];
 		
@@ -231,11 +231,11 @@ class Binary{
 		return unpacked;
 	}
 	
-	public static function writeLInt(static long value) -> string{
+	public const function writeLInt(const long value) -> string{
 		return pack("V", value);
 	}
 	
-	public static function readFloat(static string str){
+	public const function readFloat(const string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("f", str)[1];
 		}else{
@@ -243,7 +243,7 @@ class Binary{
 		}
 	}
 	
-	public static function writeFloat(static float value){
+	public const function writeFloat(const float value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("f", value);
 		}else{
@@ -251,7 +251,7 @@ class Binary{
 		}
 	}
 	
-	public static function readLFloat(static string str){
+	public const function readLFloat(const string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("f", str->rev())[1];
 		}else{
@@ -259,7 +259,7 @@ class Binary{
 		}
 	}
 	
-	public static function writeLFloat(static float value){
+	public const function writeLFloat(const float value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return strrev(pack("f", value));
 		}else{
@@ -267,11 +267,11 @@ class Binary{
 		}
 	}
 	
-	public static function printFloat(static float value){
+	public const function printFloat(const float value){
 		return preg_replace("/(\\.\\d+?)0+$/", "$1", sprintf("%F", value));
 	}
 	
-	public static function readDouble(static string str){
+	public const function readDouble(const string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("d", str)[1];
 		}else{
@@ -279,7 +279,7 @@ class Binary{
 		}
 	}
 	
-	public static function writeDouble(static double value){
+	public const function writeDouble(const double value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("d", value);
 		}else{
@@ -287,7 +287,7 @@ class Binary{
 		}
 	}
 	
-	public static function readLDouble(static string str){
+	public const function readLDouble(const string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("d", str->rev())[1];
 		}else{
@@ -295,7 +295,7 @@ class Binary{
 		}
 	}
 	
-	public static function writeLDouble(static double value){
+	public const function writeLDouble(const double value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return strrev(pack("d", value));
 		}else{
@@ -303,7 +303,7 @@ class Binary{
 		}
 	}
 
-	public static function readLong(static string x, static boolean isSigned = true){
+	public const function readLong(const string x, const boolean isSigned = true){
 		var value = "0";
 		int i = 0;
 		
@@ -320,7 +320,7 @@ class Binary{
 		return value;
 	}
 	
-	public static function writeLong(var value){
+	public const function writeLong(var value){
 		string x = "";
 		
 		if(bccomp(value, "0") == -1){
@@ -335,11 +335,11 @@ class Binary{
 		return x;
 	}
 	
-	public static function readLLong(static string str){
+	public const function readLLong(const string str){
 		return self::readLong(str->rev());
 	}
 	
-	public static function writeLLong(static string value){
+	public const function writeLLong(const string value){
 		return strrev(self::writeLong(value));
 	}
 }

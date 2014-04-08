@@ -27,7 +27,7 @@ class AxisAlignedBB{
 	public maxY;
 	public maxZ;
 
-	public function __construct(static double minX, static double minY, static double minZ, static double maxX, static double maxY, static double maxZ){
+	public function __construct(const double minX, const double minY, const double minZ, const double maxX, const double maxY, const double maxZ){
 		let this->minX = minX;
 		let this->minY = minY;
 		let this->minZ = minZ;
@@ -36,7 +36,7 @@ class AxisAlignedBB{
 		let this->maxZ = maxZ;
 	}
 
-	public function setBounds(static double minX, static double minY, static double minZ, static double maxX, static double maxY, static double maxZ) -> <AxisAlignedBB>{
+	public function setBounds(const double minX, const double minY, const double minZ, const double maxX, const double maxY, const double maxZ) -> <AxisAlignedBB>{
 		let this->minX = minX;
 		let this->minY = minY;
 		let this->minZ = minZ;
@@ -47,7 +47,7 @@ class AxisAlignedBB{
 		return this;
 	}
 
-	public function addCoord(static double x, static double y, static double z) -> <AxisAlignedBB>{
+	public function addCoord(const double x, const double y, const double z) -> <AxisAlignedBB>{
 		var vec;
 		let vec = <AxisAlignedBB> clone this;
 	
@@ -78,7 +78,7 @@ class AxisAlignedBB{
 		return vec;
 	}
 
-	public function expand(static double x, static double y, static double z) -> <AxisAlignedBB>{
+	public function expand(const double x, const double y, const double z) -> <AxisAlignedBB>{
 		var vec;
 		let vec = <AxisAlignedBB> clone this;
 		let vec->minX -= x;
@@ -91,7 +91,7 @@ class AxisAlignedBB{
 		return vec;
 	}
 
-	public function offset(static double x, static double y, static double z) -> <AxisAlignedBB>{
+	public function offset(const double x, const double y, const double z) -> <AxisAlignedBB>{
 		var vec;
 		let vec = <AxisAlignedBB> clone this;
 		let vec->minX += x;
@@ -104,7 +104,7 @@ class AxisAlignedBB{
 		return vec;
 	}
 
-	public function contract(static double x, static double y, static double z) -> <AxisAlignedBB>{
+	public function contract(const double x, const double y, const double z) -> <AxisAlignedBB>{
 		var vec;
 		let vec = <AxisAlignedBB> clone this;
 		let vec->minX += x;
@@ -128,7 +128,7 @@ class AxisAlignedBB{
 		);
 	}
 
-	public function getOffsetBoundingBox(static double x, static double y, static double z) -> <AxisAlignedBB>{
+	public function getOffsetBoundingBox(const double x, const double y, const double z) -> <AxisAlignedBB>{
 		return new AxisAlignedBB(this->minX + x, this->minY + y, this->minZ + z, this->maxX + x, this->maxY + y, this->maxZ + z);
 	}
 
