@@ -25,7 +25,7 @@ abstract class Generator{
 	public static function grad(int hash, double x, double y, double z) -> double{
 		double u;
 		double v;
-		let hash &= 15;
+		let hash = hash & 15;
 		let u = hash < 8 ? x : y;
 		let v = hash < 4 ? y : ((hash == 12 || hash == 14) ? x : z);
 		
