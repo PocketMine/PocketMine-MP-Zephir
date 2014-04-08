@@ -1,4 +1,3 @@
-
 namespace PocketMine\Utils;
 
 class Binary{
@@ -313,7 +312,6 @@ class Binary{
 	
 	public static function writeLong(var value){
 		string x = "";
-		int i = 8;
 		
 		if(bccomp(value, "0") == -1){
 			let value = bcadd(value, "18446744073709551616");
