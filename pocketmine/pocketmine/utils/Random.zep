@@ -1,3 +1,21 @@
+/*
+ *
+ *  ____            _        _   __  __ _                  __  __ ____  
+ * |  _ \ ___   ___| | _____| |_|  \/  (_)_ __   ___      |  \/  |  _ \ 
+ * | |_) / _ \ / __| |/ / _ \ __| |\/| | | '_ \ / _ \_____| |\/| | |_) |
+ * |  __/ (_) | (__|   <  __/ |_| |  | | | | | |  __/_____| |  | |  __/ 
+ * |_|   \___/ \___|_|\_\___|\__|_|  |_|_|_| |_|\___|     |_|  |_|_| 
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * @author PocketMine Team
+ * @link http://www.pocketmine.net/
+ * 
+ *
+*/
 
 namespace PocketMine\Utils;
 
@@ -6,13 +24,15 @@ namespace PocketMine\Utils;
  */
 class Random{
 	
-	protected z = 0;
-	protected w = 0;
+	protected seed;
 
 	/**
 	 * @param int $seed Integer to be used as seed.
 	 */
-	public function __construct(long seed = 0){
+	public function __construct(ulong seed = -1){
+		if(seed == -1){
+			let seed = (long) time();
+		}
 		this->setSeed(seed);
 	}
 
@@ -20,8 +40,7 @@ class Random{
 	 * @param int $seed Integer to be used as seed.
 	 */
 	public function setSeed(long seed) -> void{
-		let this->z = seed ^ 0xdeadbeef;
-		let this->w = seed ^ 0xc0de1337;
+		let this->seed = (long) crc32(Binary::writeInt(seed));
 	}
 	
 	/**
@@ -30,7 +49,7 @@ class Random{
 	 * @return int
 	 */
 	public function nextInt() -> long{
-		return this->nextSignedInt() & 0x7fffffff;
+		return (long) this->getSignedInt() & 0x7fffffff;
 	}
 
 	/**
@@ -39,9 +58,14 @@ class Random{
 	 * @return int
 	 */
 	public function nextSignedInt() -> long{
-		let this->z = 36969 * (this->z & 65535) + (this->z * 65536);
-		let this->w = 18000 * (this->w & 65535) + (this->w * 65536);
-		return this->z * 65536 + this->w;
+		long t;
+		let t = crc32(Binary::writeInt(this->seed));
+		let this->seed = this->seed ^ t;
+
+		if(t > 2147483647){
+			let t -= 4294967296;
+		}
+		return (long) t;
 	}
 
 	/**
@@ -68,7 +92,7 @@ class Random{
 	 * @return bool
 	 */
 	public function nextBoolean() -> boolean{
-		return this->nextSignedInt() >= 0;
+		return (long) this->nextSignedInt() >= 0;
 	}
 	
 	/**
