@@ -23,15 +23,15 @@ class Binary{
 	const BIG_ENDIAN = 0x00;
 	const LITTLE_ENDIAN = 0x01;
 	
-	public static function readTriad(string str) -> long{
+	public static function readTriad(static string str) -> long{
 		return (long) unpack("N", "\x00" . str)[1];
 	}
 	
-	public static function writeTriad(long value) -> string{
+	public static function writeTriad(static long value) -> string{
 		return substr(pack("N", value), 1);
 	}
 	
-	public static function writeMetadata(array data) -> string{
+	public static function writeMetadata(static array data) -> string{
 		string m = "";
 		
 		var bottom;
@@ -70,7 +70,7 @@ class Binary{
 		return m . "\x7f";
 	}
 	
-	public static function readMetadata(string value, boolean types = true) -> array{
+	public static function readMetadata(static string value, static boolean types = true) -> array{
 		long offset = 1;
 		array m = [];
 		uchar b;
@@ -139,11 +139,11 @@ class Binary{
 		return m;
 	}
 	
-	public static function readBool(string b) -> boolean{
+	public static function readBool(static string b) -> boolean{
 		return b[0] === 0 ? false : true;
 	}
 	
-	public static function writeBool(boolean b){
+	public static function writeBool(static boolean b){
 		if(b === true){
 			return "\x01";
 		}else{
@@ -151,7 +151,7 @@ class Binary{
 		}
 	}
 	
-	public static function readByte(string c, boolean isSigned = true) -> int{
+	public static function readByte(static string c, static boolean isSigned = true) -> int{
 		int b;
 		let b = ord(c[0]) * (int) 1;
 		if(isSigned === true && (b & 0x80) > 0){
@@ -169,7 +169,7 @@ class Binary{
 		return chr(c);
 	}
 	
-	public static function readShort(string str, boolean isSigned = true) -> int{
+	public static function readShort(static string str, static boolean isSigned = true) -> int{
 		int unpacked;
 		let unpacked = (int) unpack("n", str)[1];
 		
@@ -187,7 +187,7 @@ class Binary{
 		return pack("n", value);
 	}
 	
-	public static function readLShort(string str, boolean isSigned = true){
+	public static function readLShort(static string str, static boolean isSigned = true){
 		int unpacked;
 		let unpacked = (int) unpack("v", str)[1];
 		
@@ -205,7 +205,7 @@ class Binary{
 		return pack("v", value);
 	}
 
-	public static function readInt(string str) -> long{
+	public static function readInt(static string str) -> long{
 		long unpacked;
 		let unpacked = (long) unpack("N", str)[1];
 		
@@ -216,11 +216,11 @@ class Binary{
 		return unpacked;
 	}
 	
-	public static function writeInt(long value) -> string{
+	public static function writeInt(static long value) -> string{
 		return pack("N", value);
 	}
 
-	public static function readLInt(string str) -> long{
+	public static function readLInt(static string str) -> long{
 		long unpacked;
 		let unpacked = (long) unpack("V", str)[1];
 		
@@ -231,11 +231,11 @@ class Binary{
 		return unpacked;
 	}
 	
-	public static function writeLInt(long value) -> string{
+	public static function writeLInt(static long value) -> string{
 		return pack("V", value);
 	}
 	
-	public static function readFloat(string str){
+	public static function readFloat(static string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("f", str)[1];
 		}else{
@@ -243,7 +243,7 @@ class Binary{
 		}
 	}
 	
-	public static function writeFloat(float value){
+	public static function writeFloat(static float value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("f", value);
 		}else{
@@ -251,7 +251,7 @@ class Binary{
 		}
 	}
 	
-	public static function readLFloat(string str){
+	public static function readLFloat(static string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("f", str->rev())[1];
 		}else{
@@ -259,7 +259,7 @@ class Binary{
 		}
 	}
 	
-	public static function writeLFloat(float value){
+	public static function writeLFloat(static float value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return strrev(pack("f", value));
 		}else{
@@ -267,11 +267,11 @@ class Binary{
 		}
 	}
 	
-	public static function printFloat(float value){
+	public static function printFloat(static float value){
 		return preg_replace("/(\\.\\d+?)0+$/", "$1", sprintf("%F", value));
 	}
 	
-	public static function readDouble(string str){
+	public static function readDouble(static string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("d", str)[1];
 		}else{
@@ -279,7 +279,7 @@ class Binary{
 		}
 	}
 	
-	public static function writeDouble(double value){
+	public static function writeDouble(static double value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return pack("d", value);
 		}else{
@@ -287,7 +287,7 @@ class Binary{
 		}
 	}
 	
-	public static function readLDouble(string str){
+	public static function readLDouble(static string str){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return unpack("d", str->rev())[1];
 		}else{
@@ -295,24 +295,15 @@ class Binary{
 		}
 	}
 	
-	public static function writeLDouble(double value){
+	public static function writeLDouble(static double value){
 		if unlikely ENDIANNESS === self::BIG_ENDIAN{
 			return strrev(pack("d", value));
 		}else{
 			return pack("d", value);
 		}
-	}
-	
-	private static function __s_not(string s) -> string{
-		int i = 0;
-		string r = "";
-		while(i < s->length()){
-			let r .= chr(-1 - ord(s[i]));
-		}
-		return r;
 	}
 
-	public static function readLong(string x, boolean isSigned = true){
+	public static function readLong(static string x, static boolean isSigned = true){
 		var value = "0";
 		int i = 0;
 		
@@ -344,11 +335,11 @@ class Binary{
 		return x;
 	}
 	
-	public static function readLLong(string str){
+	public static function readLLong(static string str){
 		return self::readLong(str->rev());
 	}
 	
-	public static function writeLLong(string value){
+	public static function writeLLong(static string value){
 		return strrev(self::writeLong(value));
 	}
 }

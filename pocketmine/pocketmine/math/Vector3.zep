@@ -74,7 +74,7 @@ class Vector3{
 		return this->z;
 	}
 	
-	public function add(var, var y = 0, var z = 0) -> <Vector3>{
+	public function add(var x, var y = 0, var z = 0) -> <Vector3>{
 		if(x instanceof Vector3){
 			return <Vector3> this->add(x->x, x->y, x->z);
 		}else{

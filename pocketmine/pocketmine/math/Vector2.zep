@@ -44,7 +44,7 @@ class Vector2{
 		return (long) this->y;
 	}
 	
-	public function add(var x = 0, var y = 0) -> <Vector2>{
+	public function add(var x, var y = 0) -> <Vector2>{
 		if(x instanceof Vector2){
 			return <Vector2> this->add(x->x, x->y);
 		}else{
