@@ -74,22 +74,22 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, __construct) {
 
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, minX);
-	zephir_update_property_zval(this_ptr, SL("minX"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("minX"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, minY);
-	zephir_update_property_zval(this_ptr, SL("minY"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("minY"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, minZ);
-	zephir_update_property_zval(this_ptr, SL("minZ"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("minZ"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, maxX);
-	zephir_update_property_zval(this_ptr, SL("maxX"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("maxX"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, maxY);
-	zephir_update_property_zval(this_ptr, SL("maxY"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("maxY"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, maxZ);
-	zephir_update_property_zval(this_ptr, SL("maxZ"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("maxZ"), _0 TSRMLS_CC);
 
 }
 
@@ -110,22 +110,22 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, setBounds) {
 
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, minX);
-	zephir_update_property_zval(this_ptr, SL("minX"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("minX"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, minY);
-	zephir_update_property_zval(this_ptr, SL("minY"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("minY"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, minZ);
-	zephir_update_property_zval(this_ptr, SL("minZ"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("minZ"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, maxX);
-	zephir_update_property_zval(this_ptr, SL("maxX"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("maxX"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, maxY);
-	zephir_update_property_zval(this_ptr, SL("maxY"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("maxY"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, maxZ);
-	zephir_update_property_zval(this_ptr, SL("maxZ"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("maxZ"), _0 TSRMLS_CC);
 	RETURN_THISW();
 
 }
@@ -480,7 +480,7 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, calculateXOffset) {
 		_13 = zephir_fetch_nproperty_this(this_ptr, SL("minX"), PH_NOISY_CC);
 		_14 = zephir_fetch_nproperty_this(bb, SL("maxX"), PH_NOISY_CC);
 		ZEPHIR_INIT_VAR(_15);
-		sub_function(_15, _13, _14 TSRMLS_CC);
+		zephir_sub_function(_15, _13, _14 TSRMLS_CC);
 		x1 = zephir_get_doubleval(_15);
 		if (x1 < x) {
 			x = x1;
@@ -496,7 +496,7 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, calculateXOffset) {
 		_17 = zephir_fetch_nproperty_this(this_ptr, SL("maxX"), PH_NOISY_CC);
 		_18 = zephir_fetch_nproperty_this(bb, SL("minX"), PH_NOISY_CC);
 		ZEPHIR_INIT_LNVAR(_15);
-		sub_function(_15, _17, _18 TSRMLS_CC);
+		zephir_sub_function(_15, _17, _18 TSRMLS_CC);
 		x2 = zephir_get_doubleval(_15);
 		if (x2 > x) {
 			x = x2;
@@ -554,7 +554,7 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, calculateYOffset) {
 		_13 = zephir_fetch_nproperty_this(this_ptr, SL("minY"), PH_NOISY_CC);
 		_14 = zephir_fetch_nproperty_this(bb, SL("maxY"), PH_NOISY_CC);
 		ZEPHIR_INIT_VAR(_15);
-		sub_function(_15, _13, _14 TSRMLS_CC);
+		zephir_sub_function(_15, _13, _14 TSRMLS_CC);
 		y1 = zephir_get_doubleval(_15);
 		if (y1 < y) {
 			y = y1;
@@ -570,7 +570,7 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, calculateYOffset) {
 		_17 = zephir_fetch_nproperty_this(this_ptr, SL("maxY"), PH_NOISY_CC);
 		_18 = zephir_fetch_nproperty_this(bb, SL("minY"), PH_NOISY_CC);
 		ZEPHIR_INIT_LNVAR(_15);
-		sub_function(_15, _17, _18 TSRMLS_CC);
+		zephir_sub_function(_15, _17, _18 TSRMLS_CC);
 		y2 = zephir_get_doubleval(_15);
 		if (y2 > y) {
 			y = y2;
@@ -628,7 +628,7 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, calculateZOffset) {
 		_13 = zephir_fetch_nproperty_this(this_ptr, SL("minZ"), PH_NOISY_CC);
 		_14 = zephir_fetch_nproperty_this(bb, SL("maxZ"), PH_NOISY_CC);
 		ZEPHIR_INIT_VAR(_15);
-		sub_function(_15, _13, _14 TSRMLS_CC);
+		zephir_sub_function(_15, _13, _14 TSRMLS_CC);
 		z1 = zephir_get_doubleval(_15);
 		if (z1 < z) {
 			z = z1;
@@ -644,7 +644,7 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, calculateZOffset) {
 		_17 = zephir_fetch_nproperty_this(this_ptr, SL("maxZ"), PH_NOISY_CC);
 		_18 = zephir_fetch_nproperty_this(bb, SL("minZ"), PH_NOISY_CC);
 		ZEPHIR_INIT_LNVAR(_15);
-		sub_function(_15, _17, _18 TSRMLS_CC);
+		zephir_sub_function(_15, _17, _18 TSRMLS_CC);
 		z2 = zephir_get_doubleval(_15);
 		if (z2 > z) {
 			z = z2;
@@ -764,19 +764,19 @@ PHP_METHOD(PocketMine_Math_AxisAlignedBB, getAverageEdgeLength) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("maxX"), PH_NOISY_CC);
 	_1 = zephir_fetch_nproperty_this(this_ptr, SL("minX"), PH_NOISY_CC);
 	ZEPHIR_SINIT_VAR(_2);
-	sub_function(&_2, _0, _1 TSRMLS_CC);
+	zephir_sub_function(&_2, _0, _1 TSRMLS_CC);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("maxY"), PH_NOISY_CC);
 	ZEPHIR_SINIT_VAR(_3);
 	zephir_add_function(&_3, &_2, _0 TSRMLS_CC);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("minY"), PH_NOISY_CC);
 	ZEPHIR_SINIT_NVAR(_2);
-	sub_function(&_2, &_3, _0 TSRMLS_CC);
+	zephir_sub_function(&_2, &_3, _0 TSRMLS_CC);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("maxZ"), PH_NOISY_CC);
 	ZEPHIR_SINIT_NVAR(_3);
 	zephir_add_function(&_3, &_2, _0 TSRMLS_CC);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("minZ"), PH_NOISY_CC);
 	ZEPHIR_INIT_VAR(_4);
-	sub_function(_4, &_3, _0 TSRMLS_CC);
+	zephir_sub_function(_4, &_3, _0 TSRMLS_CC);
 	RETURN_MM_DOUBLE((zephir_get_doubleval(_4) / 3.0));
 
 }

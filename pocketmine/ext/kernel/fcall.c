@@ -299,7 +299,7 @@ int zephir_call_user_function(zval **object_pp, zend_class_entry *obj_ce, zephir
 	int status;
 	zend_fcall_info fci;
 	zend_fcall_info_cache fcic /* , clone */;
-	zend_zephir_globals *zephir_globals_ptr = ZEPHIR_VGLOBAL;
+	zend_zephir_globals_def *zephir_globals_ptr = ZEPHIR_VGLOBAL;
 	char *fcall_key = NULL;
 	size_t fcall_key_len;
 	ulong fcall_key_hash;
@@ -997,3 +997,8 @@ int zephir_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache 
 }
 
 #endif
+
+inline void zephir_eval_php(zval *str, zval *retval_ptr, char *context TSRMLS_DC)
+{
+    zend_eval_string_ex(Z_STRVAL_P(str), retval_ptr, context, 1 TSRMLS_CC);
+}

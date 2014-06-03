@@ -776,7 +776,6 @@ PHP_METHOD(PocketMine_Utils_Binary, readFloat) {
 		zephir_array_fetch_long(&_4, _7, 1, PH_NOISY | PH_READONLY TSRMLS_CC);
 		RETURN_CTOR(_4);
 	}
-	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -814,7 +813,6 @@ PHP_METHOD(PocketMine_Utils_Binary, writeFloat) {
 		zephir_check_call_status();
 		RETURN_MM();
 	}
-	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -850,7 +848,6 @@ PHP_METHOD(PocketMine_Utils_Binary, readLFloat) {
 		zephir_array_fetch_long(&_7, _1, 1, PH_NOISY | PH_READONLY TSRMLS_CC);
 		RETURN_CTOR(_7);
 	}
-	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -888,7 +885,6 @@ PHP_METHOD(PocketMine_Utils_Binary, writeLFloat) {
 		zephir_check_call_status();
 		RETURN_MM();
 	}
-	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -953,7 +949,6 @@ PHP_METHOD(PocketMine_Utils_Binary, readDouble) {
 		zephir_array_fetch_long(&_4, _7, 1, PH_NOISY | PH_READONLY TSRMLS_CC);
 		RETURN_CTOR(_4);
 	}
-	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -991,7 +986,6 @@ PHP_METHOD(PocketMine_Utils_Binary, writeDouble) {
 		zephir_check_call_status();
 		RETURN_MM();
 	}
-	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -1027,7 +1021,6 @@ PHP_METHOD(PocketMine_Utils_Binary, readLDouble) {
 		zephir_array_fetch_long(&_7, _1, 1, PH_NOISY | PH_READONLY TSRMLS_CC);
 		RETURN_CTOR(_7);
 	}
-	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -1065,7 +1058,6 @@ PHP_METHOD(PocketMine_Utils_Binary, writeLDouble) {
 		zephir_check_call_status();
 		RETURN_MM();
 	}
-	ZEPHIR_MM_RESTORE();
 
 }
 

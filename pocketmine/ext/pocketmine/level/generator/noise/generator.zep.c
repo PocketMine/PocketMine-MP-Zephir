@@ -157,30 +157,9 @@ PHP_METHOD(PocketMine_Level_Generator_Noise_Generator, grad) {
 
 PHP_METHOD(PocketMine_Level_Generator_Noise_Generator, getNoise2D) {
 
-	zval *x_param = NULL, *z_param = NULL;
-	double x, z;
-
-	zephir_fetch_params(0, 2, 0, &x_param, &z_param);
-
-	x = zephir_get_doubleval(x_param);
-	z = zephir_get_doubleval(z_param);
-
-
-
 }
 
 PHP_METHOD(PocketMine_Level_Generator_Noise_Generator, getNoise3D) {
-
-	zval *x_param = NULL, *y_param = NULL, *z_param = NULL;
-	double x, y, z;
-
-	zephir_fetch_params(0, 3, 0, &x_param, &y_param, &z_param);
-
-	x = zephir_get_doubleval(x_param);
-	y = zephir_get_doubleval(y_param);
-	z = zephir_get_doubleval(z_param);
-
-
 
 }
 
@@ -293,13 +272,13 @@ PHP_METHOD(PocketMine_Level_Generator_Noise_Generator, setOffset) {
 
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, x);
-	zephir_update_property_zval(this_ptr, SL("offsetX"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("offsetX"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, y);
-	zephir_update_property_zval(this_ptr, SL("offsetY"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("offsetY"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_0);
 	ZVAL_DOUBLE(_0, z);
-	zephir_update_property_zval(this_ptr, SL("offsetZ"), _0 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("offsetZ"), _0 TSRMLS_CC);
 
 }
 

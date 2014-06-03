@@ -759,7 +759,7 @@ PHP_METHOD(PocketMine_Math_Vector3, cross) {
 	ZEPHIR_SINIT_VAR(_3);
 	mul_function(&_3, _0, _1 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_4);
-	sub_function(_4, &_2, &_3 TSRMLS_CC);
+	zephir_sub_function(_4, &_2, &_3 TSRMLS_CC);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("z"), PH_NOISY_CC);
 	_1 = zephir_fetch_nproperty_this(v, SL("x"), PH_NOISY_CC);
 	ZEPHIR_SINIT_NVAR(_2);
@@ -769,7 +769,7 @@ PHP_METHOD(PocketMine_Math_Vector3, cross) {
 	ZEPHIR_SINIT_NVAR(_3);
 	mul_function(&_3, _0, _1 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_5);
-	sub_function(_5, &_2, &_3 TSRMLS_CC);
+	zephir_sub_function(_5, &_2, &_3 TSRMLS_CC);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("x"), PH_NOISY_CC);
 	_1 = zephir_fetch_nproperty_this(v, SL("y"), PH_NOISY_CC);
 	ZEPHIR_SINIT_NVAR(_2);
@@ -779,7 +779,7 @@ PHP_METHOD(PocketMine_Math_Vector3, cross) {
 	ZEPHIR_SINIT_NVAR(_3);
 	mul_function(&_3, _0, _1 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_6);
-	sub_function(_6, &_2, &_3 TSRMLS_CC);
+	zephir_sub_function(_6, &_2, &_3 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, _4, _5, _6);
 	zephir_check_call_status();
 	RETURN_MM();

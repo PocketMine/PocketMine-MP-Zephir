@@ -2,7 +2,12 @@ PHP_ARG_ENABLE(pocketmine, whether to enable pocketmine, [ --enable-pocketmine  
 
 if test "$PHP_POCKETMINE" = "yes"; then
 	AC_DEFINE(HAVE_POCKETMINE, 1, [Whether you have Pocketmine])
-	pocketmine_sources="pocketmine.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/extended/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/concat.c kernel/variables.c kernel/filter.c pocketmine/level/generator/noise/generator.c pocketmine/math/axisalignedbb.c pocketmine/math/vector2.c pocketmine/math/vector3.c pocketmine/utils/binary.c pocketmine/utils/random.c "
+	pocketmine_sources="pocketmine.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/extended/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/exit.c pocketmine/level/generator/noise/generator.zep.c
+	pocketmine/math/axisalignedbb.zep.c
+	pocketmine/math/vector2.zep.c
+	pocketmine/math/vector3.zep.c
+	pocketmine/utils/binary.zep.c
+	pocketmine/utils/random.zep.c "
 	PHP_NEW_EXTENSION(pocketmine, $pocketmine_sources, $ext_shared)
 
 	old_CPPFLAGS=$CPPFLAGS

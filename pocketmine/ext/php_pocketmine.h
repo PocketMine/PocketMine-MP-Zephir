@@ -12,7 +12,7 @@
 #define PHP_POCKETMINE_VERSION     "0.0.2"
 #define PHP_POCKETMINE_EXTNAME     "pocketmine"
 #define PHP_POCKETMINE_AUTHOR      "PocketMine Team"
-#define PHP_POCKETMINE_ZEPVERSION  "0.4.1a"
+#define PHP_POCKETMINE_ZEPVERSION  "0.4.2a"
 #define PHP_POCKETMINE_DESCRIPTION "Optional extension that implements parts of PocketMine-MP in a fast PHP extension "
 
 
@@ -58,8 +58,8 @@ ZEND_EXTERN_MODULE_GLOBALS(pocketmine)
 	#define ZEPHIR_VGLOBAL &(pocketmine_globals)
 #endif
 
-#define zephir_globals pocketmine_globals
-#define zend_zephir_globals zend_pocketmine_globals
+#define zephir_globals_def pocketmine_globals
+#define zend_zephir_globals_def zend_pocketmine_globals
 
 extern zend_module_entry pocketmine_module_entry;
 #define phpext_pocketmine_ptr &pocketmine_module_entry
