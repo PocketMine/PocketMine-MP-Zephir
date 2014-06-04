@@ -9,7 +9,7 @@
 #include "kernel/globals.h"
 
 #define PHP_POCKETMINE_NAME        "pocketmine"
-#define PHP_POCKETMINE_VERSION     "0.0.2"
+#define PHP_POCKETMINE_VERSION     "0.0.5"
 #define PHP_POCKETMINE_EXTNAME     "pocketmine"
 #define PHP_POCKETMINE_AUTHOR      "PocketMine Team"
 #define PHP_POCKETMINE_ZEPVERSION  "0.4.2a"
